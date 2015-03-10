@@ -1,0 +1,64 @@
+
+Input
+
+Output
+ Screen         Canvas
+ Lamp1          Lamp
+ Lamp2          Lamp
+ Lamp3          Lamp
+ Lamp4          Lamp
+ 
+Input
+ VolNAV         Rotation/Button
+ AsSwitchNav    Button
+ NavOuter       Rotation
+ NavInner       Rotation/Button
+ HDG            Rotation
+ AP.L0          Button
+ AP.L1          Button
+ AP.L2          Button
+ AP.L3          Button
+ AP.L4          Button
+ AP.L5          Button
+ AP.R0          Button
+ AP.R1          Button
+ AP.R2          Button
+ AP.R3          Button
+ AP.R4          Button
+ AP.R5          Button
+ AltOuter       Rotation
+ AltInner       Rotation
+ VolCom         Rotation/Button
+ AsSwitchCOM    Button
+ ComOuter       Rotation
+ ComInner       Rotation/Button
+ CRS            Button
+ BARO           Button
+ PAN            Rotation/Button
+ PANUp          Button
+ PANLeft        Button
+ PANRight       Button
+ PanDown        Button
+ DidectTo       Button
+ MENU           Button
+ FPL            Button
+ PROC           Button
+ CRL            Button
+ ENT            Button
+ FmsOuter       Rotation
+ FmsInner       Rotation/Button
+ SoftKey.000    Button
+ SoftKey.001    Button
+ SoftKey.002    Button
+ SoftKey.003    Button
+ SoftKey.004    Button
+ SoftKey.005    Button
+ SoftKey.006    Button
+ SoftKey.007    Button
+ SoftKey.008    Button
+ SoftKey.009    Button
+ SoftKey.010    Button
+ SoftKey.011    Button
+
+Objects
+ Cover
