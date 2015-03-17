@@ -14,7 +14,7 @@
     <object-name>Lamp2</object-name>
     <object-name>Lamp3</object-name>
     <object-name>Lamp4</object-name>
-    <texture-prop>texture2</texture-prop>
+    <texture-prop>texture</texture-prop>
     <texture>Textures/GDU-1045.png</texture>
   </animation>
 
@@ -24,7 +24,7 @@
       <lightmap-enabled type="int">1</lightmap-enabled>
       <lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
       <texture n="3">
-        <image>Textures/GDU-104X_lightmap.png</image>
+        <image>Textures/GDU-104X.lightmap.png</image>
       </texture>
     </parameters>
     <type>material</type>
@@ -90,7 +90,7 @@
       <lightmap-enabled type="int">1</lightmap-enabled>
       <lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
       <texture n="3">
-        <image>Textures/GDU-104X_lightmap.png</image>
+        <image>Textures/GDU-104X.lightmap.png</image>
       </texture>
     </parameters>
     <object-name>Panel</object-name>

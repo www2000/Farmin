@@ -19,14 +19,15 @@
   </animation>
 
   <animation>
-    <type>material</type>
+    <inherits-from>Effects/model-combined-deferred</inherits-from>
     <parameters>
-    <lightmap-enabled type="int">1</lightmap-enabled>
+      <lightmap-enabled type="int">1</lightmap-enabled>
       <lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
       <texture n="3">
         <image>Textures/GDU-104X.lightmap.png</image>
       </texture>
     </parameters>
+    <type>material</type>
     <object-name>Panel</object-name>
     <object-name>AsSwitchNav</object-name>
     <object-name>NavOuter</object-name>
@@ -77,7 +78,7 @@
       <lightmap-enabled type="int">1</lightmap-enabled>
       <lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
       <texture n="3">
-        <image>Textures/GDU-104X_lightmap.png</image>
+        <image>Textures/GDU-104X.lightmap.png</image>
       </texture>
     </parameters>
     <object-name>Panel</object-name>
