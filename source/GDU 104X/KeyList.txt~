@@ -13,7 +13,7 @@ Input
  AsSwitchNav    Button
  NavOuter       Rotation
  NavInner       Rotation/Button
- HDG            Rotation
+ HDG            Rotation/Button
  AP.L0          Button
  AP.L1          Button
  AP.L2          Button
@@ -27,7 +27,7 @@ Input
  AP.R4          Button
  AP.R5          Button
  AltOuter       Rotation
- AltInner       Rotation
+ AltInner       Rotation/Button
  VolCom         Rotation/Button
  AsSwitchCOM    Button
  ComOuter       Rotation
@@ -43,7 +43,7 @@ Input
  MENU           Button
  FPL            Button
  PROC           Button
- CRL            Button
+ CLR            Button
  ENT            Button
  FmsOuter       Rotation
  FmsInner       Rotation/Button

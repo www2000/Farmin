@@ -9,7 +9,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
 			<texture n="3">
-				<image>GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<type>material</type>
@@ -357,7 +357,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L00</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L00</object-name>
@@ -368,7 +368,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L01</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L01</object-name>
@@ -379,7 +379,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L02</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L02</object-name>
@@ -390,7 +390,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L03</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L03</object-name>
@@ -401,7 +401,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L04</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L04</object-name>
@@ -412,7 +412,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L05</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L05</object-name>
@@ -423,7 +423,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L06</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L06</object-name>
@@ -434,7 +434,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L07</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L07</object-name>
@@ -445,7 +445,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L08</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L08</object-name>
@@ -456,7 +456,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L09</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L09</object-name>
@@ -467,7 +467,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/L10</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.L10</object-name>
@@ -478,7 +478,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R00</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R00</object-name>
@@ -489,7 +489,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R01</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R01</object-name>
@@ -500,7 +500,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R02</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R02</object-name>
@@ -511,7 +511,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R03</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R03</object-name>
@@ -522,7 +522,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R04</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R04</object-name>
@@ -533,7 +533,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R05</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R05</object-name>
@@ -544,7 +544,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R06</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R06</object-name>
@@ -555,7 +555,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R07</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R07</object-name>
@@ -566,7 +566,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R08</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R08</object-name>
@@ -577,7 +577,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R09</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R09</object-name>
@@ -588,7 +588,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/GMA-1347/Button/R10</use></lightmap-factor>
 			<texture n="3">
-				<image>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>audio.L.R10</object-name>
