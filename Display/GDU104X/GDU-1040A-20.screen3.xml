@@ -95,6 +95,35 @@
     </condition>
   </animation>
 
+  <effect>
+  <inherits-from>Effects/model-combined-deferred</inherits-from>
+  <parameters>
+    <lightmap-enabled type="int">1</lightmap-enabled>
+    <lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
+    <texture n="3">
+      <image>Textures/GDU-1040A-20.lightmap.png</image>
+    </texture>
+    </parameters>
+    <object-name>Panel</object-name>
+    <object-name>AsSwitchNav</object-name>
+    <object-name>NavOuter</object-name>
+    <object-name>NavInner</object-name>
+    <object-name>VolNAV</object-name>
+    <object-name>SoftKey.000</object-name>
+    <object-name>SoftKey.001</object-name>
+    <object-name>SoftKey.002</object-name>
+    <object-name>SoftKey.003</object-name>
+    <object-name>SoftKey.004</object-name>
+    <object-name>SoftKey.005</object-name>
+    <object-name>SoftKey.006</object-name>
+    <object-name>SoftKey.007</object-name>
+    <object-name>SoftKey.008</object-name>
+    <object-name>SoftKey.009</object-name>
+    <object-name>SoftKey.010</object-name>
+    <object-name>SoftKey.011</object-name>
+    <object-name>Cover</object-name>
+  </effect>
+
   <animation>
     <name>screen3</name>
     <object-name>Screen</object-name>

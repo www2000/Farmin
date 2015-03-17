@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <PropertyList>
-	
+
 	<path>Model/GMA-1347.ac</path>
 	<animation>
 		<inherits-from>Effects/model-combined-deferred</inherits-from>
@@ -61,16 +61,16 @@
 		<object-name>VOL.outer</object-name>
 		<object-name>VOL.inner</object-name>
 		<object-name>Backup</object-name>
-		<texture-prop>texture</texture-prop> 
-		<texture>Textures/GMA-1347.png</texture> 
+		<texture-prop>texture</texture-prop>
+		<texture>Textures/GMA-1347.png</texture>
 	</animation>
-	
+
 	<animation>
 		<type>pick</type>
 		<object-name>audio.B.L00</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL00();</script>
@@ -82,7 +82,7 @@
 		<object-name>audio.B.L01</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL01();</script>
@@ -94,7 +94,7 @@
 		<object-name>audio.B.L02</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL02();</script>
@@ -106,7 +106,7 @@
 		<object-name>audio.B.L03</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL03();</script>
@@ -118,7 +118,7 @@
 		<object-name>audio.B.L04</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL04();</script>
@@ -130,7 +130,7 @@
 		<object-name>audio.B.L05</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL05();</script>
@@ -142,7 +142,7 @@
 		<object-name>audio.B.L06</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL06();</script>
@@ -154,7 +154,7 @@
 		<object-name>audio.B.L07</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL07();</script>
@@ -166,7 +166,7 @@
 		<object-name>audio.B.L08</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL08();</script>
@@ -178,7 +178,7 @@
 		<object-name>audio.B.L09</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL09();</script>
@@ -190,7 +190,7 @@
 		<object-name>audio.B.L10</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BL10();</script>
@@ -202,7 +202,7 @@
 		<object-name>audio.B.R00</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR00();</script>
@@ -214,7 +214,7 @@
 		<object-name>audio.B.R01</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR01();</script>
@@ -226,7 +226,7 @@
 		<object-name>audio.B.R02</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR02();</script>
@@ -238,7 +238,7 @@
 		<object-name>audio.B.R03</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR03();</script>
@@ -250,7 +250,7 @@
 		<object-name>audio.B.R04</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR04();</script>
@@ -262,7 +262,7 @@
 		<object-name>audio.B.R05</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR05();</script>
@@ -274,7 +274,7 @@
 		<object-name>audio.B.R06</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR06();</script>
@@ -286,7 +286,7 @@
 		<object-name>audio.B.R07</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR07();</script>
@@ -298,7 +298,7 @@
 		<object-name>audio.B.R08</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR08();</script>
@@ -310,7 +310,7 @@
 		<object-name>audio.B.R09</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR09();</script>
@@ -322,7 +322,7 @@
 		<object-name>audio.B.R10</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>  
+			<repeatable>false</repeatable>
 			<binding>
 				<command>nasal</command>
 				<script>AudioPanel1.BR10();</script>
@@ -330,7 +330,7 @@
 		</action>
 	</animation>
 
-	
+
 	<animation>
 		<object-name>audio.B.R08</object-name>
 		<object-name>audio.L.R08</object-name>
@@ -338,16 +338,16 @@
 		<condition>
 			<equals>
 				<value type="bool">true</value>
-				<value type="bool">False</value>	
+				<value type="bool">False</value>
 			</equals>
 		</condition>
 	</animation>
-	
+
 	<animation>
 		<type>pick</type>
 		<object-name>audio.B.L00</object-name>
 		<binding>
-		
+
 		</binding>
 	</animation>
 
@@ -599,7 +599,7 @@
 			<lightmap-enabled type="int">1</lightmap-enabled>
 			<lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
 			<texture n="3">
-				<image>GMA-1347/Textures/GMA-1347_Lightmap.png</image>
+				<image>Textures/GMA-1347_Lightmap.png</image>
 			</texture>
 		</parameters>
 		<object-name>Plane</object-name>

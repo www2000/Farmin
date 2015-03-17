@@ -82,6 +82,67 @@
     <texture>Textures/GDU-104X.png</texture>
   </animation>
 
+  <effect>
+    <inherits-from>Effects/model-combined-deferred</inherits-from>
+    <parameters>
+      <lightmap-enabled type="int">1</lightmap-enabled>
+      <lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
+      <texture n="3">
+        <image>Textures/GDU-104X_lightmap.png</image>
+      </texture>
+    </parameters>
+    <object-name>Panel</object-name>
+    <object-name>AsSwitchNav</object-name>
+    <object-name>NavOuter</object-name>
+    <object-name>NavInner</object-name>
+    <object-name>HDG</object-name>
+    <object-name>AP.L0</object-name>
+    <object-name>AP.L1</object-name>
+    <object-name>AP.L2</object-name>
+    <object-name>AP.L3</object-name>
+    <object-name>AP.L4</object-name>
+    <object-name>AP.L5</object-name>
+    <object-name>AP.R1</object-name>
+    <object-name>AP.R2</object-name>
+    <object-name>AP.R4</object-name>
+    <object-name>AP.R5</object-name>
+    <object-name>AltOuter</object-name>
+    <object-name>AltInner</object-name>
+    <object-name>VolNAV</object-name>
+    <object-name>VolCom</object-name>
+    <object-name>AsSwitchCOM</object-name>
+    <object-name>ComOuter</object-name>
+    <object-name>ComInner</object-name>
+    <object-name>CRS</object-name>
+    <object-name>BARO</object-name>
+    <object-name>PAN</object-name>
+    <object-name>PANUp</object-name>
+    <object-name>PANLeft</object-name>
+    <object-name>PANRight</object-name>
+    <object-name>PanDown</object-name>
+    <object-name>DidectTo</object-name>
+    <object-name>MENU</object-name>
+    <object-name>FPL</object-name>
+    <object-name>PROC</object-name>
+    <object-name>CLR</object-name>
+    <object-name>ENT</object-name>
+    <object-name>FmsOuter</object-name>
+    <object-name>FmsInner</object-name>
+    <object-name>SoftKey.000</object-name>
+    <object-name>SoftKey.001</object-name>
+    <object-name>SoftKey.002</object-name>
+    <object-name>SoftKey.003</object-name>
+    <object-name>SoftKey.004</object-name>
+    <object-name>SoftKey.005</object-name>
+    <object-name>SoftKey.006</object-name>
+    <object-name>SoftKey.007</object-name>
+    <object-name>SoftKey.008</object-name>
+    <object-name>SoftKey.009</object-name>
+    <object-name>SoftKey.010</object-name>
+    <object-name>SoftKey.011</object-name>
+    <object-name>Cover</object-name>
+  </effect>
+  
   <animation>
     <name>screen1</name>
     <object-name>Screen</object-name>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <PropertyList>
-  
+
   <path>Model/GDU-104X.ac</path>
-  
+
   <animation>
     <type>material</type>
     <object-name>screw.000</object-name>
@@ -14,12 +14,13 @@
     <object-name>Lamp2</object-name>
     <object-name>Lamp3</object-name>
     <object-name>Lamp4</object-name>
-    <texture-prop>texture</texture-prop> 
-    <texture>Textures/GDU-104X.png</texture> 
+    <texture-prop>texture</texture-prop>
+    <texture>Textures/GDU-104X.png</texture>
   </animation>
-  
+
   <animation>
     <type>material</type>
+    <inherits-from>Effects/model-combined-deferred</inherits-from>
     <parameters>
       <lightmap-enabled type="int">1</lightmap-enabled>
       <lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
@@ -77,15 +78,76 @@
     <object-name>SoftKey.010</object-name>
     <object-name>SoftKey.011</object-name>
     <object-name>Cover</object-name>
-    <texture-prop>texture</texture-prop> 
-    <texture>Textures/GDU-104X.png</texture> 
+    <texture-prop>texture</texture-prop>
+    <texture>Textures/GDU-104X.png</texture>
   </animation>
+
+  <effect>
+    <inherits-from>Effects/model-combined-deferred</inherits-from>
+    <parameters>
+      <lightmap-enabled type="int">1</lightmap-enabled>
+      <lightmap-factor><use>instrumentation/FarminFG1000/Lightmap</use></lightmap-factor>
+      <texture n="3">
+        <image>Textures/GDU-104X_lightmap.png</image>
+      </texture>
+    </parameters>
+    <object-name>Panel</object-name>
+    <object-name>AsSwitchNav</object-name>
+    <object-name>NavOuter</object-name>
+    <object-name>NavInner</object-name>
+    <object-name>HDG</object-name>
+    <object-name>AP.L0</object-name>
+    <object-name>AP.L1</object-name>
+    <object-name>AP.L2</object-name>
+    <object-name>AP.L3</object-name>
+    <object-name>AP.L4</object-name>
+    <object-name>AP.L5</object-name>
+    <object-name>AP.R1</object-name>
+    <object-name>AP.R2</object-name>
+    <object-name>AP.R4</object-name>
+    <object-name>AP.R5</object-name>
+    <object-name>AltOuter</object-name>
+    <object-name>AltInner</object-name>
+    <object-name>VolNAV</object-name>
+    <object-name>VolCom</object-name>
+    <object-name>AsSwitchCOM</object-name>
+    <object-name>ComOuter</object-name>
+    <object-name>ComInner</object-name>
+    <object-name>CRS</object-name>
+    <object-name>BARO</object-name>
+    <object-name>PAN</object-name>
+    <object-name>PANUp</object-name>
+    <object-name>PANLeft</object-name>
+    <object-name>PANRight</object-name>
+    <object-name>PanDown</object-name>
+    <object-name>DidectTo</object-name>
+    <object-name>MENU</object-name>
+    <object-name>FPL</object-name>
+    <object-name>PROC</object-name>
+    <object-name>CLR</object-name>
+    <object-name>ENT</object-name>
+    <object-name>FmsOuter</object-name>
+    <object-name>FmsInner</object-name>
+    <object-name>SoftKey.000</object-name>
+    <object-name>SoftKey.001</object-name>
+    <object-name>SoftKey.002</object-name>
+    <object-name>SoftKey.003</object-name>
+    <object-name>SoftKey.004</object-name>
+    <object-name>SoftKey.005</object-name>
+    <object-name>SoftKey.006</object-name>
+    <object-name>SoftKey.007</object-name>
+    <object-name>SoftKey.008</object-name>
+    <object-name>SoftKey.009</object-name>
+    <object-name>SoftKey.010</object-name>
+    <object-name>SoftKey.011</object-name>
+    <object-name>Cover</object-name>
+  </effect>
   
   <animation>
     <name>screen4</name>
     <object-name>Screen</object-name>
-  </animation> 
-  
+  </animation>
+
   <animation>
     <type>material</type>
     <object-name>Screen</object-name>
@@ -96,7 +158,7 @@
       <factor-prop>instrumentation/FarminGDU104X/display-brightness-norm</factor-prop>
     </emission>
   </animation>
-  
+
   <animation>
     <object-name>Cover</object-name>
     <object-name>AP.R0</object-name>
@@ -105,11 +167,11 @@
     <condition>
       <equals>
         <value type="bool">true</value>
-        <value type="bool">False</value>  
+        <value type="bool">False</value>
       </equals>
     </condition>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>VolNAV</object-name>
@@ -141,7 +203,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AsSwitchNav</object-name>
@@ -159,7 +221,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>NavOuter</object-name>
@@ -178,7 +240,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>NavInner</object-name>
@@ -210,7 +272,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>HDG</object-name>
@@ -242,7 +304,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.L0</object-name>
@@ -260,7 +322,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.L1</object-name>
@@ -278,7 +340,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.L2</object-name>
@@ -296,7 +358,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.L3</object-name>
@@ -314,7 +376,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.L4</object-name>
@@ -332,7 +394,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.L5</object-name>
@@ -350,7 +412,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.R1</object-name>
@@ -368,7 +430,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.R2</object-name>
@@ -386,7 +448,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.R4</object-name>
@@ -404,7 +466,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AP.R5</object-name>
@@ -422,7 +484,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AltOuter</object-name>
@@ -441,7 +503,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AltInner</object-name>
@@ -473,7 +535,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>VolCom</object-name>
@@ -505,7 +567,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>AsSwitchCOM</object-name>
@@ -523,7 +585,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>ComOuter</object-name>
@@ -542,7 +604,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>ComInner</object-name>
@@ -574,7 +636,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>CRS</object-name>
@@ -593,7 +655,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>BARO</object-name>
@@ -625,7 +687,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>PAN</object-name>
@@ -657,7 +719,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>PANUp</object-name>
@@ -726,7 +788,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>DidectTo</object-name>
@@ -744,7 +806,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>MENU</object-name>
@@ -762,7 +824,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>FPL</object-name>
@@ -780,7 +842,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>PROC</object-name>
@@ -798,7 +860,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>CLR</object-name>
@@ -816,7 +878,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>ENT</object-name>
@@ -834,7 +896,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>FmsOuter</object-name>
@@ -853,7 +915,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>FmsInner</object-name>
@@ -885,7 +947,7 @@
       </binding>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.000</object-name>
@@ -903,7 +965,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.001</object-name>
@@ -921,7 +983,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.002</object-name>
@@ -939,7 +1001,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.003</object-name>
@@ -957,7 +1019,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.004</object-name>
@@ -975,7 +1037,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.005</object-name>
@@ -993,7 +1055,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.006</object-name>
@@ -1011,7 +1073,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.007</object-name>
@@ -1029,7 +1091,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.008</object-name>
@@ -1047,7 +1109,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.009</object-name>
@@ -1065,7 +1127,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.010</object-name>
@@ -1083,7 +1145,7 @@
       </mod-up>
     </action>
   </animation>
-  
+
   <animation>
     <type>pick</type>
     <object-name>SoftKey.011</object-name>
@@ -1101,7 +1163,7 @@
       </mod-up>
     </action>
   </animation>
-  
 
-  
+
+
 </PropertyList>
