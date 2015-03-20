@@ -164,6 +164,17 @@
   </animation>
 
   <animation>
+    <type>material</type>
+    <object-name>Screen</object-name>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+      <factor-prop>instrumentation/FarminGDU104X/display-brightness-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
     <type>pick</type>
     <object-name>VolNAV</object-name>
     <action>
