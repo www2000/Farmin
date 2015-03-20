@@ -7,11 +7,11 @@ var PFD = {
 		var font_mapper = func(family, weight)
 		{
 			if( family == "Liberation Sans" and weight == "normal" )
-				return "LiberationFonts/LiberationSans-Regular.ttf";
+				return "Fonts/LiberationFonts/LiberationSans-Regular.ttf";
 			elsif( family == "Sans" and weight == "normal" )
-				return "LiberationFonts/LiberationSans-Regular.ttf";
+				return "Fonts/LiberationFonts/LiberationSans-Regular.ttf";
 			elsif( family == "BoeingCDULarge" and weight == "normal" )
-				return "BoeingCDU-Large.ttf";
+				return "Fonts/BoeingCDU-Large.ttf";
 
 		};
 		canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
@@ -21,12 +21,8 @@ var PFD = {
 			m[key] = {};
 			m[key].Element = pfd.getElementById(key);
 			m[key].Center = pfd.getElementById(key).updateCenter()
-			
 		};
-		#var svg_keys = ["LindSpeed","SpeedNonLint","SpeedLastDigitLint"];
-		#foreach(var key; svg_keys) {
-		#	m[key] = pfd.getElementById(key);
-		#}
+		m.['LindSpeed'].Element.setTranslation(0,300*6);
 		return m
 	},
 
