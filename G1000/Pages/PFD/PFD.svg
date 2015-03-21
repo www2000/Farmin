@@ -23,11 +23,11 @@
      borderopacity="1"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.90509668"
-     inkscape:cx="602.12629"
-     inkscape:cy="415.59781"
+     inkscape:zoom="2.56"
+     inkscape:cx="223.63819"
+     inkscape:cy="401.03955"
      inkscape:document-units="px"
-     inkscape:current-layer="layer12"
+     inkscape:current-layer="layer9"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -229,13 +229,13 @@
      inkscape:groupmode="layer"
      inkscape:label="Laag 1">
     <image
-       sodipodi:absref="/home/jean-paul/fgfs/farmin-fgdata/Aircraft/Instruments-3d/Farmin/Display/GDU104X/Pages/PFD/../../../../../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd.png"
-       xlink:href="../../../../../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd.png"
-       y="284.36218"
-       x="-1.0000001"
-       id="image3156"
+       sodipodi:absref="/home/jean-paul/fgfs/install/flightgear/fgdata/Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd.png"
+       xlink:href="../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd.png"
+       width="1026"
        height="768"
-       width="1026" />
+       id="image3156"
+       x="-1.0000001"
+       y="284.36218" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -244,14 +244,14 @@
      style="display:none"
      sodipodi:insensitive="true">
     <image
-       sodipodi:absref="/home/jean-paul/fgfs/farmin-fgdata/Aircraft/Instruments-3d/Farmin/Display/GDU104X/Pages/PFD/../../../../../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd2.png"
-       xlink:href="../../../../../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd2.png"
-       width="1024"
-       height="768"
-       preserveAspectRatio="none"
-       id="image4375"
+       sodipodi:absref="/home/jean-paul/fgfs/install/flightgear/fgdata/Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd2.png"
+       xlink:href="../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd2.png"
+       y="-5.6843419e-14"
        x="0"
-       y="-5.6843419e-14" />
+       id="image4375"
+       preserveAspectRatio="none"
+       height="768"
+       width="1024" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -260,14 +260,14 @@
      style="display:none;opacity:1"
      sodipodi:insensitive="true">
     <image
-       sodipodi:absref="/home/jean-paul/fgfs/farmin-fgdata/Aircraft/Instruments-3d/Farmin/Display/GDU104X/Pages/PFD/../../../../../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd4.png"
-       xlink:href="../../../../../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd4.png"
-       width="1024"
-       height="768"
-       preserveAspectRatio="none"
-       id="image4526"
+       sodipodi:absref="/home/jean-paul/fgfs/install/flightgear/fgdata/Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd4.png"
+       xlink:href="../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd4.png"
+       y="2.8421709e-14"
        x="0"
-       y="2.8421709e-14" />
+       id="image4526"
+       preserveAspectRatio="none"
+       height="768"
+       width="1024" />
   </g>
   <g
      style="display:inline"
@@ -3551,15 +3551,14 @@
      inkscape:groupmode="layer"
      id="layer8"
      inkscape:label="TextBG"
-     style="display:inline;opacity:1"
-     sodipodi:insensitive="true">
+     style="display:inline;opacity:1">
     <path
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 708,284.5 9,-6.5 0,-14 54,0 0,-13 34,0 0,67 -34,0 0,-13 -54,0 0,-14 z"
        id="path4400"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 158,264 46,0 0,-13 22,0 0,27 10,6.5 -10,6.5 0,27 -22,0 0,-13 -46,0 z"
        id="path4410"
        inkscape:connector-curvature="0" />
@@ -3646,16 +3645,16 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="167.16151"
-       y="295.51642"
+       x="205.16151"
+       y="295.51819"
        id="SpeedNonLint"
        sodipodi:linespacing="125%"
        inkscape:label="#text4429"><tspan
          sodipodi:role="line"
          id="tspan4431"
-         x="167.16151"
-         y="295.51642"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1">00</tspan></text>
+         x="205.16151"
+         y="295.51819"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;fill-opacity:1">00</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

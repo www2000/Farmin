@@ -1,3 +1,4 @@
+screen1 = {};
 var GDU104XINIT = {
     new: func(screenID,mode)
     {
@@ -23,7 +24,17 @@ var GDU104XINIT = {
     },
 };
 
+var updater = func(){
+    ias =getprop("velocities/airspeed-kt");
+    screen1.PFD.updateSpeed(ias);
+    pitch = getprop("orientation/pitch-deg");
+    roll = getprop("orientation/roll-deg");
+    screen1.PFD.updateAi(roll,pitch);
+    settimer(func updater(), 0.05);
+};
 
 setlistener("/nasal/canvas/loaded", func{
-    GDU104XINIT.new(1,'PFD');
+    screen1 = GDU104XINIT.new(1,'PFD');
+    updater();
+
 },1);
