@@ -5,7 +5,7 @@ var GDU104XINIT = {
         var m = { parents:[  GDU104XINIT   ] };
         m.canvas = canvas.new({
                 "name": "screen"~screenID,
-                "size": [1024, 1024],
+                "size": [1024, 768],
                 "view": [1024, 768],
                 "mipmapping": 1
         });
@@ -26,10 +26,16 @@ var GDU104XINIT = {
 
 var updater = func(){
     ias =getprop("velocities/airspeed-kt");
-    screen1.PFD.updateSpeed(ias);
     pitch = getprop("orientation/pitch-deg");
     roll = getprop("orientation/roll-deg");
+    heading = getprop("orientation/heading-deg");
+    alt = getprop("instrumentation/altimeter/indicated-altitude-ft");
+    slipskid = getprop("instrumentation/slip-skid-ball/indicated-slip-skid");
     screen1.PFD.updateAi(roll,pitch);
+    screen1.PFD.updateSpeed(ias);
+    screen1.PFD.UpdateHeading(heading);
+    screen1.PFD.updateAlt(alt);
+    screen1.PFD.updateSlipSkid(slipskid);
     settimer(func updater(), 0.05);
 };
 
