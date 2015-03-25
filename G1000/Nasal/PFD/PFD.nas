@@ -11,7 +11,7 @@ var PFD = {
 			elsif( family == "Sans" and weight == "normal" )
 				return "LiberationFonts/LiberationSans-Regular.ttf";
 			elsif( family == "BoeingCDULarge" and weight == "normal" )
-				return "BoeingCDU-Large.ttf";
+				return "LiberationFonts/LiberationSans-Regular.ttf";
 
 		};
 		canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
@@ -28,8 +28,11 @@ var PFD = {
 		#5,715272637
 
 		#clip
-		m.bankPointerLineL.Element.set("clip", "rect(0,1024,768,459.500)"); #459,500
-		m.bankPointerLineR.Element.set("clip", "rect(0,459.500,768,0)"); #459,500
+
+		m.bankPointerLineL.Element.set("clip", "rect(0,1024,768,459.500)");
+		m.bankPointerLineR.Element.set("clip", "rect(0,459.500,768,0)");
+		#m.PitchScale.Element.set("clip", "rect(134,590,394,330)");
+		#note to my self clip for the Pitch Scale is: top = 134 right = 590 bottem = 394 left = 330
 		return m
 	},
 

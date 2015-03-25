@@ -24,11 +24,11 @@
      borderopacity="1"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="487.69052"
-     inkscape:cy="578.49446"
+     inkscape:zoom="1"
+     inkscape:cx="436.06784"
+     inkscape:cy="443.36791"
      inkscape:document-units="px"
-     inkscape:current-layer="layer13"
+     inkscape:current-layer="layer14"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -100,10 +100,6 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="643.5,374.5"
-       orientation="0,1"
-       id="guide4719" />
-    <sodipodi:guide
        position="679,388"
        orientation="1,0"
        id="guide4721"
@@ -168,10 +164,6 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="669.0556,667.99494"
-       orientation="1,0"
-       id="guide4743" />
-    <sodipodi:guide
        position="703,621.01653"
        orientation="1,0"
        id="guide4745"
@@ -181,6 +173,12 @@
        position="612.625,483.5"
        orientation="0,1"
        id="guide4747"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="590,383.65625"
+       orientation="1,0"
+       id="guide4775"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
   </sodipodi:namedview>
@@ -219,27 +217,27 @@
     <image
        sodipodi:absref="/home/jean-paul/fgfs/Farmin/G1000/Pages/PFD/../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd.png"
        xlink:href="../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd.png"
-       width="1026"
-       height="768"
-       id="image3156"
+       y="284.36218"
        x="-1.0000001"
-       y="284.36218" />
+       id="image3156"
+       height="768"
+       width="1026" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="Laag 3"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <image
        sodipodi:absref="/home/jean-paul/fgfs/Farmin/G1000/Pages/PFD/../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd2.png"
        xlink:href="../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd2.png"
-       y="-5.6843419e-14"
-       x="0"
-       id="image4375"
-       preserveAspectRatio="none"
+       width="1024"
        height="768"
-       width="1024" />
+       preserveAspectRatio="none"
+       id="image4375"
+       x="0"
+       y="-5.6843419e-14" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -266,13 +264,22 @@
     <image
        sodipodi:absref="/home/jean-paul/fgfs/Farmin/G1000/Pages/PFD/../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd4.png"
        xlink:href="../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd4.png"
-       y="2.8421709e-14"
-       x="0"
-       id="image4526"
-       preserveAspectRatio="none"
+       width="1024"
        height="768"
-       width="1024" />
+       preserveAspectRatio="none"
+       id="image4526"
+       x="0"
+       y="2.8421709e-14" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer14"
+     inkscape:label="Laag 6"
+     style="display:inline" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer15"
+     inkscape:label="Laag 7" />
   <g
      style="display:inline"
      inkscape:label="horizon"
