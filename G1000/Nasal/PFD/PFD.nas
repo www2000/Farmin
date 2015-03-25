@@ -16,7 +16,7 @@ var PFD = {
 		};
 		canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
 		var Speed = {};
-		var svg_keys = ["LindSpeed","SpeedNonLint","SpeedLastDigitLint", "Horizon","bankPointer","bankPointerLineL", "bankPointerLineR","Compass","AltNonLintBig","AltNonLintSmall","AltLint","SlipSkid","CompassText"];
+		var svg_keys = ["LindSpeed","SpeedNonLint","SpeedLastDigitLint", "Horizon","bankPointer","bankPointerLineL", "bankPointerLineR","Compass","AltNonLintBig","AltNonLintSmall","AltLint","SlipSkid","CompassText","VSI","VSIText"];
 		foreach(var key; svg_keys) {
 			print(key);
 			m[key] = {};
@@ -42,7 +42,21 @@ var PFD = {
 		me.bankPointer.roll.setRotation(RollR, Bpc);
 		me.bankPointerLineL.roll.setRotation(RollR, Bpc);
 		me.bankPointerLineR.roll.setRotation(RollR, Bpc);
-
+		if (RollR < 0) #top, right, bottom, left
+		{
+			me.bankPointerLineL.Element.set("clip", "rect(0,1,1,0)"); #459,500
+			me.bankPointerLineR.Element.set("clip", "rect(0,459.500,768,0)");
+		}
+		elsif (RollR > 0)
+		{
+			me.bankPointerLineL.Element.set("clip", "rect(0,1024,768,459.500)"); #459,500
+			me.bankPointerLineR.Element.set("clip", "rect(0,1,1,0)");
+		}
+		else
+		{
+			me.bankPointerLineL.Element.set("clip", "rect(0,1024,768,459.500)"); #459,500
+			me.bankPointerLineR.Element.set("clip", "rect(0,459.500,768,0)");
+		}
 		me.Horizon.pitch.setTranslation(0,Pitch*10.5);
 	},
 
@@ -91,8 +105,6 @@ var PFD = {
 		me.SlipSkid.Element.setTranslation(slipskid*5.73,0);
 	},
 
-
-
 	updateAlt: func(alt)
 	{
 		if(alt !=nil)
@@ -111,4 +123,44 @@ var PFD = {
 			me.AltNonLintBig.Element.setText(sprintf("%02d",alt1));
 		}
 	},
+
+	updateVSI: func(VSI)
+	{
+		if(VSI != nil)
+		{
+
+			if(VSI > 4250)
+			{
+				VSIOffset = -148.21875;
+			}
+			elsif(VSI < -4250)
+			{
+				VSIOffset = 148.21875;
+			}
+			else
+			{
+				VSIOffset = (-VSI)*0.034875;
+			};
+			if((VSI < 100) and (VSI > -100))
+			{
+				VSIText = "";
+			}
+			elsif((VSI < -10000) or (VSI > 10000))
+			{
+				VSIText = "----";
+			}
+			else
+			{
+				VSIText = sprintf("%1d",int(VSI/50)*50);
+			}
+		}
+		else
+		{
+			VSIText = "";
+			VSIOffset = 0
+		};
+		print (VSIText ~ " " ~ sprintf("%1.0f", VSI));
+		me.VSIText.Element.setText(VSIText);
+		me.VSI.Element.setTranslation(0,VSIOffset);
+	}
 };

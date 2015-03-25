@@ -31,11 +31,13 @@ var updater = func(){
     heading = getprop("orientation/heading-deg");
     alt = getprop("instrumentation/altimeter/indicated-altitude-ft");
     slipskid = getprop("instrumentation/slip-skid-ball/indicated-slip-skid");
+    VSI = getprop("instrumentation/vertical-speed-indicator/indicated-speed-fpm");
     screen1.PFD.updateAi(roll,pitch);
     screen1.PFD.updateSpeed(ias);
     screen1.PFD.UpdateHeading(heading);
     screen1.PFD.updateAlt(alt);
     screen1.PFD.updateSlipSkid(slipskid);
+    screen1.PFD.updateVSI(VSI);
     settimer(func updater(), 0.05);
 };
 
