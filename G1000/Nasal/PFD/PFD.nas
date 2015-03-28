@@ -16,12 +16,13 @@ var PFD = {
 		};
 		canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
 		var Speed = {};
-		var svg_keys = ["LindSpeed","SpeedNonLint","SpeedLastDigitLint", "Horizon","bankPointer","bankPointerLineL", "bankPointerLineR","Compass","AltNonLintBig","AltNonLintSmall","AltLint","SlipSkid","CompassText","VSI","VSIText"];
+		var svg_keys = ["LindSpeed","SpeedNonLint","SpeedLastDigitLint", "Horizon","bankPointer","bankPointerLineL", "bankPointerLineR","Compass","AltNonLintBig","AltNonLintSmall","AltLint","SlipSkid","CompassText","VSI","VSIText","PitchScale","HorizonLine"];
 		foreach(var key; svg_keys) {
 			print(key);
 			m[key] = {};
 			m[key].Element	= pfd.getElementById(key);
 			m[key].Element.updateCenter();
+			m[key].center	= m[key].Element.getCenter();
 			m[key].roll		= m[key].Element.createTransform();
 			m[key].pitch 	= m[key].Element.createTransform();
 		};
@@ -31,20 +32,34 @@ var PFD = {
 
 		m.bankPointerLineL.Element.set("clip", "rect(0,1024,768,459.500)");
 		m.bankPointerLineR.Element.set("clip", "rect(0,459.500,768,0)");
-		#m.PitchScale.Element.set("clip", "rect(134,590,394,330)");
+		m.PitchScale.Element.set("clip", "rect(134,590,394,330)");
 		#note to my self clip for the Pitch Scale is: top = 134 right = 590 bottem = 394 left = 330
 		return m
 	},
 
 	updateAi: func(Roll,Pitch){
+		#offset = 392.504021806/2;
+		offset = 10;
+		#if(Pitch < 1.3962634)
+		#{
+		#	Pitch = 1.3962634;
+		#}
+		#elsif (Pitch > -1.3962634)
+		#{
+		#	Pitch = 1.3962634;
+		#};
 		RollR = -Roll*D2R;
-		me.Horizon.roll.setRotation(RollR, me.Horizon.Element.getCenter());
-		me.Horizon.roll.setRotation(RollR, me.Horizon.Element.getCenter());
 
-		Bpc = me.bankPointer.Element.getCenter();
+		Bpc  = me.bankPointer.Element.getCenter();
 		me.bankPointer.roll.setRotation(RollR, Bpc);
 		me.bankPointerLineL.roll.setRotation(RollR, Bpc);
 		me.bankPointerLineR.roll.setRotation(RollR, Bpc);
+
+		me.Horizon.roll.setRotation(RollR, Bpc);
+		me.HorizonLine.roll.setRotation(RollR, Bpc);
+		me.PitchScale.roll.setRotation(RollR, Bpc);
+
+		print(Bpc);
 		if (RollR < 0) #top, right, bottom, left
 		{
 			me.bankPointerLineL.Element.set("clip", "rect(0,1,1,0)"); #459,500
@@ -60,7 +75,9 @@ var PFD = {
 			me.bankPointerLineL.Element.set("clip", "rect(0,1024,768,459.500)"); #459,500
 			me.bankPointerLineR.Element.set("clip", "rect(0,459.500,768,0)");
 		}
-		me.Horizon.pitch.setTranslation(0,Pitch*10.5);
+		me.Horizon.pitch.setTranslation(0,Pitch*offset);
+		me.HorizonLine.pitch.setTranslation(0,Pitch*offset);
+		me.PitchScale.pitch.setTranslation(0,Pitch*offset);
 	},
 
 	UpdateHeading: func(Heading)
@@ -162,7 +179,7 @@ var PFD = {
 			VSIText = "";
 			VSIOffset = 0
 		};
-		print (VSIText ~ " " ~ sprintf("%1.0f", VSI));
+		#print (VSIText ~ " " ~ sprintf("%1.0f", VSI));
 		me.VSIText.Element.setText(VSIText);
 		me.VSI.Element.setTranslation(0,VSIOffset);
 	}
