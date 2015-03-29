@@ -16,105 +16,141 @@ var PFD = {
 		};
 		canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
 		var Speed = {};
-		var svg_keys = ["LindSpeed","SpeedNonLint","SpeedLastDigitLint", "Horizon","bankPointer","bankPointerLineL", "bankPointerLineR","Compass","AltNonLintBig","AltNonLintSmall","AltLint","SlipSkid","CompassText","VSI","VSIText","PitchScale","HorizonLine"];
+		var svg_keys = ["LindSpeed","SpeedtLint1","SpeedtLint10",
+		"SpeedtLint100", "Horizon","bankPointer","bankPointerLineL",
+		"bankPointerLineR","Compass","SlipSkid","CompassText","VSI",
+		"VSIText","HorizonLine", "PitchScale","AltLint10","AltLint100",
+		"AltLint1000","AltLint10000"];
 		foreach(var key; svg_keys) {
 			print(key);
-			m[key] = {};
-			m[key].Element	= pfd.getElementById(key);
-			m[key].Element.updateCenter();
-			m[key].center	= m[key].Element.getCenter();
-			m[key].roll		= m[key].Element.createTransform();
-			m[key].pitch 	= m[key].Element.createTransform();
+			m[key] = nil;
+			m[key] = pfd.getElementById(key);
+			m[key].updateCenter();
+			m[key].trans	= m[key].createTransform();
+			m[key].rot		= m[key].createTransform();
+
 		};
 		#5,715272637
 
 		#clip
-
-		m.bankPointerLineL.Element.set("clip", "rect(0,1024,768,459.500)");
-		m.bankPointerLineR.Element.set("clip", "rect(0,459.500,768,0)");
-		m.PitchScale.Element.set("clip", "rect(134,590,394,330)");
+		m.bankPointerLineL.set("clip", "rect(0,1024,768,459.500)");
+		m.bankPointerLineR.set("clip", "rect(0,459.500,768,0)");
+		m.PitchScale.set("clip", "rect(134,590,394,330)");
+		m.AltLint10.set("clip", "rect(251.5,1024,317.5,0)");
+		m.AltLint100.set("clip", "rect(264.5,1024,304.5,0)");
+		m.AltLint1000.set("clip", "rect(264.5,1024,304.5,0)");
+		m.AltLint10000.set("clip", "rect(264.5,1024,304.5,0)");
+		m.SpeedtLint1.set("clip", "rect(251.5,1024,317.5,0)");
+		m.SpeedtLint10.set("clip", "rect(264.5,1024,304.5,0)");
+		m.SpeedtLint100.set("clip", "rect(264.5,1024,304.5,0)");
 		#note to my self clip for the Pitch Scale is: top = 134 right = 590 bottem = 394 left = 330
 		return m
 	},
 
-	updateAi: func(Roll,Pitch){
-		#offset = 392.504021806/2;
-		offset = 10;
-		#if(Pitch < 1.3962634)
-		#{
-		#	Pitch = 1.3962634;
-		#}
-		#elsif (Pitch > -1.3962634)
-		#{
-		#	Pitch = 1.3962634;
-		#};
-		RollR = -Roll*D2R;
+	updateAi: func(roll,pitch){
+		if (pitch > 80 )
+		{
+			pitch = 80;
+		}
+		elsif(pitch < -80)
+		{
+			pitch = -80;
+		}
 
-		Bpc  = me.bankPointer.Element.getCenter();
-		me.bankPointer.roll.setRotation(RollR, Bpc);
-		me.bankPointerLineL.roll.setRotation(RollR, Bpc);
-		me.bankPointerLineR.roll.setRotation(RollR, Bpc);
+		RollR = -roll*D2R;
 
-		me.Horizon.roll.setRotation(RollR, Bpc);
-		me.HorizonLine.roll.setRotation(RollR, Bpc);
-		me.PitchScale.roll.setRotation(RollR, Bpc);
+		me.Horizon.rot.setRotation(RollR, me.PitchScale.getCenter());
+		me.Horizon.trans.setTranslation(0,pitch*6.8571428);
+		me.HorizonLine.rot.setRotation(RollR, me.PitchScale.getCenter());
+		me.HorizonLine.trans.setTranslation(0,pitch*6.8571428);
+		me.PitchScale.rot.setRotation(RollR, me.PitchScale.getCenter());
+		me.PitchScale.trans.setTranslation(0,pitch*6.8571428);
 
-		print(Bpc);
+		brot = me.bankPointer.getCenter();
+		me.bankPointer.rot.setRotation(RollR,brot);
+		me.bankPointerLineL.rot.setRotation(RollR,brot);
+		me.bankPointerLineR.rot.setRotation(RollR,brot);
+
 		if (RollR < 0) #top, right, bottom, left
 		{
-			me.bankPointerLineL.Element.set("clip", "rect(0,1,1,0)"); #459,500
-			me.bankPointerLineR.Element.set("clip", "rect(0,459.500,768,0)");
+			me.bankPointerLineL.set("clip", "rect(0,1,1,0)"); #459,500
+			me.bankPointerLineR.set("clip", "rect(0,459.500,768,0)");
 		}
 		elsif (RollR > 0)
 		{
-			me.bankPointerLineL.Element.set("clip", "rect(0,1024,768,459.500)"); #459,500
-			me.bankPointerLineR.Element.set("clip", "rect(0,1,1,0)");
+			me.bankPointerLineL.set("clip", "rect(0,1024,768,459.500)"); #459,500
+			me.bankPointerLineR.set("clip", "rect(0,1,1,0)");
 		}
 		else
 		{
-			me.bankPointerLineL.Element.set("clip", "rect(0,1024,768,459.500)"); #459,500
-			me.bankPointerLineR.Element.set("clip", "rect(0,459.500,768,0)");
+			me.bankPointerLineL.set("clip", "rect(0,1024,768,459.500)"); #459,500
+			me.bankPointerLineR.set("clip", "rect(0,459.500,768,0)");
 		}
-		me.Horizon.pitch.setTranslation(0,Pitch*offset);
-		me.HorizonLine.pitch.setTranslation(0,Pitch*offset);
-		me.PitchScale.pitch.setTranslation(0,Pitch*offset);
 	},
 
 	UpdateHeading: func(Heading)
 	{
-		me.Compass.Element.setRotation(-Heading*D2R);
-		me.CompassText.Element.setText(sprintf("%03.0f°",math.floor(Heading)));
+		me.Compass.setRotation(-Heading*D2R);
+		me.CompassText.setText(sprintf("%03.0f°",math.floor(Heading)));
 	},
 
 	updateSpeed: func(speed)
 	{
-		me.data.speed = speed;
+		if(speed != nil)
+		{
+			me.data.speed = speed;
+			Offset1 = 0;
+			Offset10 = 0;
+			if (speed < 20)
+			{
+				me.LindSpeed.set("clip", "rect(114px, 239px, 284,5px, 154px)");
+			}
+			elsif (speed > 20 and  speed < 50)
+			{
+				me.LindSpeed.set("clip", sprintf("rect(114px, 239px, %1.0fpx, 154px)", math.floor(284.5 + ((speed-20) * 5.71225) ) ) );
+			}
+			else
+			{
+				me.LindSpeed.set("clip", "rect(114px, 239px, 455px, 154px)");
+			};
 
-		if (speed > 20)
-		{
-			me.SpeedNonLint.Element.setText(sprintf("%2.0f",math.floor(speed/10)));
-			SpLd = math.mod(math.floor(speed),10);
-			me.SpeedLastDigitLint.Element.setText(sprintf("%1.0f",SpLd));
-			me.LindSpeed.Element.setTranslation(0,speed*5.71225);
-		}else{
-			me.SpeedNonLint.Element.setText("---");
-			me.SpeedLastDigitLint.Element.setText('');
-			me.LindSpeed.Element.setTranslation(0,114,245);
-			me.LindSpeed.Element.set("clip", "rect(114px, 239px, 455px, 154px)");
-		};
+			if (speed >= 20)
+			{
+				me.LindSpeed.setTranslation(0,speed*5.71225);
+			}else{
+				speed = 20;
+				#me.SpeedNonLint.setText("---");
+				me.LindSpeed.setTranslation(0,114,245);
+				me.LindSpeed.set("clip", "rect(114px, 239px, 455px, 154px)");
+			};
 
-		if (speed < 20)
-		{
-			me.LindSpeed.Element.set("clip", "rect(114px, 239px, 284,5px, 154px)");
+			speed1		= math.mod(speed,10);
+			speed10		= int(math.mod(speed/10,10));
+			speed100	= int(math.mod(speed/100,10));
+			speed0_1 	= speed1 - int(speed1);
+			if (speed1 >= 9)
+			{
+				speed10 += speed0_1;
+			}
+
+			if (speed1 >= 9 and speed10 >= 9)
+			{
+				speed100 += speed0_1;
+			}
+
+			if(speed >= 10)
+			{
+				Offset1 = 10;
+			}
+			if(speed >= 100)
+			{
+				Offset10 = 10;
+			}
+			me.LindSpeed.setTranslation(0,speed*5.71225);
+			me.SpeedtLint1.setTranslation(0,(speed1+Offset1)*36);
+			me.SpeedtLint10.setTranslation(0,(speed10+Offset10)*36);
+			me.SpeedtLint100.setTranslation(0,(speed100)*36);
 		}
-		elsif (speed > 20 and  speed < 50)
-		{
-			me.LindSpeed.Element.set("clip", sprintf("rect(114px, 239px, %1.0fpx, 154px)", math.floor(284.5 + ((speed-20) * 5.71225) ) ) );
-		}
-		else
-		{
-			me.LindSpeed.Element.set("clip", "rect(114px, 239px, 455px, 154px)");
-		};
 	},
 	updateSpeedTrend: func(Speedtrent)
 	{
@@ -122,25 +158,78 @@ var PFD = {
 
 	},
 	updateSlipSkid: func(slipskid){
-		me.SlipSkid.Element.setTranslation(slipskid*5.73,0);
+		me.SlipSkid.setTranslation(slipskid*5.73,0);
+
 	},
 
 	updateAlt: func(alt)
 	{
+
 		if(alt !=nil)
 		{
-			if (alt < 0 )
+			Offset10 = 0;
+			Offset100 = 0;
+			Offset1000 = 0;
+			if(alt < 0)
 			{
-				altf = math.floor(-alt);
-			}else{
-				altf = math.floor(alt);
+				Ne = 1;
+				alt = -alt
 			}
-			alt3 = math.mod(altf,100);
-			me.AltLint.Element.setText(sprintf("%02d",alt3));
-			alt2 = (math.mod(altf,1000)-alt3)/100;
-			me.AltNonLintSmall.Element.setText(sprintf("%1d",alt2));
-			alt1 = (alt - math.mod(altf,1000))/1000;
-			me.AltNonLintBig.Element.setText(sprintf("%02d",alt1));
+			else
+			{
+				Ne = 0;
+			}
+
+			Alt10		= math.mod(alt,100);
+			Alt100		= int(math.mod(alt/100,10));
+			Alt1000		= int(math.mod(alt/1000,10));
+			Alt10000	= int(math.mod(alt/10000,10));
+			Alt20 		= math.mod(Alt10,20)/20;
+			if (Alt10 >= 80)
+			{
+				Alt100 += Alt20
+			};
+
+			if (Alt10 >= 80 and Alt100 >= 9)
+			{
+				Alt1000 += Alt20
+			};
+
+			if (Alt10 >= 80 and Alt100 >= 9 and Alt1000 >= 9)
+			{
+				Alt10000 += Alt20
+			};
+
+			if (alt > 100)
+			{
+				Offset10 = 100;
+			}
+
+			if (alt > 1000)
+			{
+				Offset100 = 10;
+			}
+
+			if (alt > 10000)
+			{
+				Offset1000 = 10;
+			}
+
+			if(!Ne)
+			{
+				me.AltLint10.setTranslation(0,(Alt10+Offset10)*1.2498);
+				me.AltLint100.setTranslation(0,(Alt100+Offset100)*30);
+				me.AltLint1000.setTranslation(0,(Alt1000+Offset1000)*36);
+				me.AltLint10000.setTranslation(0,(Alt10000)*36);
+			}
+			elsif(Ne)
+			{
+				me.AltLint10.setTranslation(0,(Alt10+Offset10)*-1.2498);
+				me.AltLint100.setTranslation(0,(Alt100+Offset100)*-30);
+				me.AltLint1000.setTranslation(0,(Alt1000+Offset1000)*-36);
+				me.AltLint10000.setTranslation(0,(Alt10000)*-36);
+			}
+
 		}
 	},
 
@@ -180,7 +269,7 @@ var PFD = {
 			VSIOffset = 0
 		};
 		#print (VSIText ~ " " ~ sprintf("%1.0f", VSI));
-		me.VSIText.Element.setText(VSIText);
-		me.VSI.Element.setTranslation(0,VSIOffset);
+		me.VSIText.setText(VSIText);
+		me.VSI.setTranslation(0,VSIOffset);
 	}
 };
