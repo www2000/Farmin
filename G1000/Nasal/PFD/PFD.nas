@@ -167,67 +167,82 @@ var PFD = {
 
 		if(alt !=nil)
 		{
-			Offset10 = 0;
-			Offset100 = 0;
-			Offset1000 = 0;
-			if(alt < 0)
+			if(alt > -1000 and alt < 1000000)
 			{
-				Ne = 1;
-				alt = -alt
+				me.AltLint10.show();
+				me.AltLint100.show();
+				me.AltLint1000.show();
+				me.AltLint10000.show();
+
+				Offset10 = 0;
+				Offset100 = 0;
+				Offset1000 = 0;
+				if(alt < 0)
+				{
+					Ne = 1;
+					alt = -alt
+				}
+				else
+				{
+					Ne = 0;
+				}
+
+				Alt10		= math.mod(alt,100);
+				Alt100		= int(math.mod(alt/100,10));
+				Alt1000		= int(math.mod(alt/1000,10));
+				Alt10000	= int(math.mod(alt/10000,10));
+				Alt20 		= math.mod(Alt10,20)/20;
+				if (Alt10 >= 80)
+				{
+					Alt100 += Alt20
+				};
+
+				if (Alt10 >= 80 and Alt100 >= 9)
+				{
+					Alt1000 += Alt20
+				};
+
+				if (Alt10 >= 80 and Alt100 >= 9 and Alt1000 >= 9)
+				{
+					Alt10000 += Alt20
+				};
+
+				if (alt > 100)
+				{
+					Offset10 = 100;
+				}
+
+				if (alt > 1000)
+				{
+					Offset100 = 10;
+				}
+
+				if (alt > 10000)
+				{
+					Offset1000 = 10;
+				}
+
+				if(!Ne)
+				{
+					me.AltLint10.setTranslation(0,(Alt10+Offset10)*1.2498);
+					me.AltLint100.setTranslation(0,(Alt100+Offset100)*30);
+					me.AltLint1000.setTranslation(0,(Alt1000+Offset1000)*36);
+					me.AltLint10000.setTranslation(0,(Alt10000)*36);
+				}
+				elsif(Ne)
+				{
+					me.AltLint10.setTranslation(0,(Alt10+Offset10)*-1.2498);
+					me.AltLint100.setTranslation(0,(Alt100+Offset100)*-30);
+					me.AltLint1000.setTranslation(0,(Alt1000+Offset1000)*-36);
+					me.AltLint10000.setTranslation(0,(Alt10000)*-36);
+				}
 			}
 			else
 			{
-				Ne = 0;
-			}
-
-			Alt10		= math.mod(alt,100);
-			Alt100		= int(math.mod(alt/100,10));
-			Alt1000		= int(math.mod(alt/1000,10));
-			Alt10000	= int(math.mod(alt/10000,10));
-			Alt20 		= math.mod(Alt10,20)/20;
-			if (Alt10 >= 80)
-			{
-				Alt100 += Alt20
-			};
-
-			if (Alt10 >= 80 and Alt100 >= 9)
-			{
-				Alt1000 += Alt20
-			};
-
-			if (Alt10 >= 80 and Alt100 >= 9 and Alt1000 >= 9)
-			{
-				Alt10000 += Alt20
-			};
-
-			if (alt > 100)
-			{
-				Offset10 = 100;
-			}
-
-			if (alt > 1000)
-			{
-				Offset100 = 10;
-			}
-
-			if (alt > 10000)
-			{
-				Offset1000 = 10;
-			}
-
-			if(!Ne)
-			{
-				me.AltLint10.setTranslation(0,(Alt10+Offset10)*1.2498);
-				me.AltLint100.setTranslation(0,(Alt100+Offset100)*30);
-				me.AltLint1000.setTranslation(0,(Alt1000+Offset1000)*36);
-				me.AltLint10000.setTranslation(0,(Alt10000)*36);
-			}
-			elsif(Ne)
-			{
-				me.AltLint10.setTranslation(0,(Alt10+Offset10)*-1.2498);
-				me.AltLint100.setTranslation(0,(Alt100+Offset100)*-30);
-				me.AltLint1000.setTranslation(0,(Alt1000+Offset1000)*-36);
-				me.AltLint10000.setTranslation(0,(Alt10000)*-36);
+				me.AltLint10.hide();
+				me.AltLint100.hide();
+				me.AltLint1000.hide();
+				me.AltLint10000.hide();
 			}
 
 		}
