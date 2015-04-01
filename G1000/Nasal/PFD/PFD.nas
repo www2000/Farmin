@@ -59,8 +59,69 @@ var PFD = {
 
 		RollR = -roll*D2R;
 
+		AP	= 57.5;
+		AN	= 27.5;
+		BP	= 37.5;
+		BN	= 40;
+
+		HLAPRN = math.sqrt(1/(math.pow(math.cos(RollR)/AP,2)+(math.pow(math.sin(RollR)/BN,2))));
+		HLANBN = math.sqrt(1/(math.pow(math.cos(RollR)/AN,2)+(math.pow(math.sin(RollR)/BN,2))));
+		HLAPBP = math.sqrt(1/(math.pow(math.cos(RollR)/AP,2)+(math.pow(math.sin(RollR)/BP,2))));
+		HLANBP = math.sqrt(1/(math.pow(math.cos(RollR)/AN,2)+(math.pow(math.sin(RollR)/BP,2))));
+
+		RAP	= ((roll > -90) and (roll <= 90));
+		RAN = ((roll <= -90) or (roll > 90));
+		RBP = (roll >= 0);
+		RBN = (roll < 0);
+		if((pitch >= 0) and (RAP and RBN))
+		{
+			limit = HLAPRN;
+		}
+		elsif((pitch >= 0) and (RAN and RBN))
+		{
+			limit = HLANBN;
+		}
+		elsif((pitch >= 0)and (RAP and RBP))
+		{
+			limit = HLAPBP;
+		}
+		elsif((pitch >= 0)and (RAN and RBP))
+		{
+			limit = HLANBP;
+		}
+		elsif((pitch < 0) and (RAN and RBP))
+		{
+			limit = HLAPRN;
+		}
+		elsif((pitch < 0) and (RAP and RBP))
+		{
+			limit = HLANBN;
+		}
+		elsif((pitch < 0)and (RAN and RBN))
+		{
+			limit = HLAPBP;
+		}
+		elsif((pitch < 0)and (RAP and RBN))
+		{
+			limit = HLANBP;
+		}
+
+		if(pitch > limit)
+		{
+			Hpitch = limit;
+		}
+		elsif(-pitch > limit)
+		{
+			Hpitch = -limit;
+		}
+		else
+		{
+			Hpitch = pitch;
+		}
+
 		me.Horizon.rot.setRotation(RollR, me.PitchScale.getCenter());
-		me.Horizon.trans.setTranslation(0,pitch*6.8571428);
+		me.Horizon.trans.setTranslation(0,Hpitch*6.8571428);
+
 		me.HorizonLine.rot.setRotation(RollR, me.PitchScale.getCenter());
 		me.HorizonLine.trans.setTranslation(0,pitch*6.8571428);
 		me.PitchScale.rot.setRotation(RollR, me.PitchScale.getCenter());
@@ -101,11 +162,13 @@ var PFD = {
 			me.data.speed = speed;
 			Offset1 = 0;
 			Offset10 = 0;
+
 			if (speed < 20)
 			{
+				speed = 20;
 				me.LindSpeed.set("clip", "rect(114px, 239px, 284,5px, 154px)");
 			}
-			elsif (speed > 20 and  speed < 50)
+			elsif (speed >= 20 and  speed < 50)
 			{
 				me.LindSpeed.set("clip", sprintf("rect(114px, 239px, %1.0fpx, 154px)", math.floor(284.5 + ((speed-20) * 5.71225) ) ) );
 			}
@@ -114,11 +177,11 @@ var PFD = {
 				me.LindSpeed.set("clip", "rect(114px, 239px, 455px, 154px)");
 			};
 
-			if (speed >= 20)
+			if (speed > 20)
 			{
 				me.LindSpeed.setTranslation(0,speed*5.71225);
 			}else{
-				speed = 20;
+
 				#me.SpeedNonLint.setText("---");
 				me.LindSpeed.setTranslation(0,114,245);
 				me.LindSpeed.set("clip", "rect(114px, 239px, 455px, 154px)");
@@ -151,6 +214,10 @@ var PFD = {
 			me.SpeedtLint10.setTranslation(0,(speed10+Offset10)*36);
 			me.SpeedtLint100.setTranslation(0,(speed100)*36);
 		}
+		else
+		{
+			me.LindSpeed.Element.set("clip", "rect(114px, 239px, 455px, 154px)");
+ 		}
 	},
 	updateSpeedTrend: func(Speedtrent)
 	{
