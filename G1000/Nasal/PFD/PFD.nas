@@ -16,11 +16,20 @@ var PFD = {
 		};
 		canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
 		var Speed = {};
-		var svg_keys = ["LindSpeed","SpeedtLint1","SpeedtLint10",
-		"SpeedtLint100", "Horizon","bankPointer","bankPointerLineL",
+		var svg_keys = ["Horizon","bankPointer","bankPointerLineL",
 		"bankPointerLineR","Compass","SlipSkid","CompassText","VSI",
-		"VSIText","HorizonLine", "PitchScale","AltLint10","AltLint100",
-		"AltLint1000","AltLint10000"];
+		"VSIText","HorizonLine", "PitchScale"];
+		#speed
+		svg_keys ~= ["LindSpeed","SpeedtLint1","SpeedtLint10","SpeedtLint100"];
+		#alt
+		svg_keys ~= ["AltLint10","AltLint100","AltLint1000","AltLint10000"];
+		svg_keys ~= ["AltBigU1","AltBigU2","AltBigU3","AltBigU4","AltBigU5","AltBigU6",];
+		svg_keys ~= ["AltBigD1","AltBigD2","AltBigD3","AltBigD4","AltBigD5","AltBigD6",];
+		svg_keys ~= ["AltSmallU1","AltSmallU2","AltSmallU3","AltSmallU4","AltSmallU5","AltSmallU6",];
+		svg_keys ~= ["AltSmallD1","AltSmallD2","AltSmallD3","AltSmallD4","AltSmallD5","AltSmallD6",];
+		svg_keys ~= ["AltBigC","AltSmallC","LintAlt"];
+
+		svg_keys = svg_keys ~[];
 		foreach(var key; svg_keys) {
 			print(key);
 			m[key] = nil;
@@ -229,35 +238,34 @@ var PFD = {
 
 	},
 
-	updateAlt: func(alt)
+	updateAlt: func(Alt)
 	{
 
-		if(alt !=nil)
+		if(Alt !=nil)
 		{
-			if(alt > -1000 and alt < 1000000)
+			me.AltLint10.show();
+			me.AltLint100.show();
+			me.AltLint1000.show();
+			me.AltLint10000.show();
+			if(Alt> -1000 and Alt< 1000000)
 			{
-				me.AltLint10.show();
-				me.AltLint100.show();
-				me.AltLint1000.show();
-				me.AltLint10000.show();
-
 				Offset10 = 0;
 				Offset100 = 0;
 				Offset1000 = 0;
-				if(alt < 0)
+				if(Alt< 0)
 				{
 					Ne = 1;
-					alt = -alt
+					Alt= -Alt
 				}
 				else
 				{
 					Ne = 0;
 				}
 
-				Alt10		= math.mod(alt,100);
-				Alt100		= int(math.mod(alt/100,10));
-				Alt1000		= int(math.mod(alt/1000,10));
-				Alt10000	= int(math.mod(alt/10000,10));
+				Alt10		= math.mod(Alt,100);
+				Alt100		= int(math.mod(Alt/100,10));
+				Alt1000		= int(math.mod(Alt/1000,10));
+				Alt10000	= int(math.mod(Alt/10000,10));
 				Alt20 		= math.mod(Alt10,20)/20;
 				if (Alt10 >= 80)
 				{
@@ -274,17 +282,17 @@ var PFD = {
 					Alt10000 += Alt20
 				};
 
-				if (alt > 100)
+				if (Alt> 100)
 				{
 					Offset10 = 100;
 				}
 
-				if (alt > 1000)
+				if (Alt> 1000)
 				{
 					Offset100 = 10;
 				}
 
-				if (alt > 10000)
+				if (Alt> 10000)
 				{
 					Offset1000 = 10;
 				}
@@ -295,6 +303,8 @@ var PFD = {
 					me.AltLint100.setTranslation(0,(Alt100+Offset100)*30);
 					me.AltLint1000.setTranslation(0,(Alt1000+Offset1000)*36);
 					me.AltLint10000.setTranslation(0,(Alt10000)*36);
+					me.LintAlt.setTranslation(0,(math.mod(Alt,100))*0.57375);
+					var altCentral = (int(Alt/100)*100);
 				}
 				elsif(Ne)
 				{
@@ -302,6 +312,50 @@ var PFD = {
 					me.AltLint100.setTranslation(0,(Alt100+Offset100)*-30);
 					me.AltLint1000.setTranslation(0,(Alt1000+Offset1000)*-36);
 					me.AltLint10000.setTranslation(0,(Alt10000)*-36);
+					me.LintAlt.setTranslation(0,(math.mod(Alt,100))*-0.57375);
+					var altCentral = -(int(Alt/100)*100);
+				}
+				var altCentral = int(Alt/100)*100;
+				print(altCentral);
+				me["AltBigC"].setText("");
+				me["AltSmallC"].setText("");
+				var placeInList = [1,2,3,4,5,6];
+				foreach(var place; placeInList)
+				{
+					altUP = altCentral + (place*100);
+					if(altUP == 0)
+					{
+						me["AltBigD"~place].setText(sprintf("$1D"));
+						me["AltSmallD"~place].setText(altDown);
+					}
+					elsif(math.mod(altUP,500) == 0 and altDown != 0)
+					{
+						me["AltBigD"~place].setText("");
+						me["AltSmallD"~place].setText(altDown);
+					}
+					else
+					{
+						me["AltBigD"~place].setText("");
+						me["AltSmallD"~place].setText(altDown);
+					}
+
+					altDown = altCentral - (place*100);
+					if(altDown == 0)
+					{
+						me["AltBigD"~place].setText("");
+						me["AltSmallD"~place].setText(altDown);
+					}
+					elsif(math.mod(altDown,500) == 0 and altDown != 0)
+					{
+						me["AltBigD"~place].setText("");
+						me["AltSmallD"~place].setText(altDown);
+					}
+					else
+					{
+						me["AltBigD"~place].setText("");
+						me["AltSmallD"~place].setText(altDown);
+					}
+
 				}
 			}
 			else
