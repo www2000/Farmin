@@ -41,8 +41,30 @@ var updater = func(){
     settimer(func updater(), 0.05);
 };
 
+var updaterSlow = func()
+{
+    if(getprop("instrumentation/marker-beacon/outer"))
+    {
+        screen1.PFD.updateMarkers(1);
+    }
+    elsif(getprop("instrumentation/marker-beacon/middle"))
+    {
+        screen1.PFD.updateMarkers(2);
+    }
+    elsif(getprop("instrumentation/marker-beacon/inner"))
+    {
+        screen1.PFD.updateMarkers(3);
+    }
+    else
+    {
+        screen1.PFD.updateMarkers(0);
+    }
+    settimer(func updaterSlow(), 0.5);
+}
+
 setlistener("/nasal/canvas/loaded", func{
     screen1 = GDU104XINIT.new(1,'PFD');
     updater();
+    thread.newthread(updaterSlow);
 
 },1);

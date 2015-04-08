@@ -16,6 +16,7 @@ var PFD = {
 		};
 		canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
 		var Speed = {};
+
 		var svg_keys = ["Horizon","bankPointer","bankPointerLineL",
 		"bankPointerLineR","Compass","SlipSkid","CompassText","VSI",
 		"VSIText","HorizonLine", "PitchScale"];
@@ -28,6 +29,7 @@ var PFD = {
 		svg_keys ~= ["AltSmallU1","AltSmallU2","AltSmallU3","AltSmallU4","AltSmallU5","AltSmallU6",];
 		svg_keys ~= ["AltSmallD1","AltSmallD2","AltSmallD3","AltSmallD4","AltSmallD5","AltSmallD6",];
 		svg_keys ~= ["AltBigC","AltSmallC","LintAlt"];
+		svg_keys ~= ["Marker","MarkerBG","MarkerText"];
 
 		svg_keys = svg_keys ~[];
 		foreach(var key; svg_keys) {
@@ -52,6 +54,8 @@ var PFD = {
 		m.SpeedtLint1.set("clip", "rect(251.5,1024,317.5,0)");
 		m.SpeedtLint10.set("clip", "rect(264.5,1024,304.5,0)");
 		m.SpeedtLint100.set("clip", "rect(264.5,1024,304.5,0)");
+
+		m.LintAlt.set("clip", "rect(114px, 1024px, 455px, 0px)");
 		#note to my self clip for the Pitch Scale is: top = 134 right = 590 bottem = 394 left = 330
 		return m
 	},
@@ -193,7 +197,6 @@ var PFD = {
 
 				#me.SpeedNonLint.setText("---");
 				me.LindSpeed.setTranslation(0,114,245);
-				me.LindSpeed.set("clip", "rect(114px, 239px, 455px, 154px)");
 			};
 
 			speed1		= math.mod(speed,10);
@@ -315,47 +318,102 @@ var PFD = {
 					me.LintAlt.setTranslation(0,(math.mod(Alt,100))*-0.57375);
 					var altCentral = -(int(Alt/100)*100);
 				}
-				var altCentral = int(Alt/100)*100;
-				print(altCentral);
 				me["AltBigC"].setText("");
 				me["AltSmallC"].setText("");
 				var placeInList = [1,2,3,4,5,6];
 				foreach(var place; placeInList)
 				{
 					altUP = altCentral + (place*100);
+					offset = -30.078;
+					if (altUP < 0)
+					{
+						altUP = -altUP;
+						prefix = "-";
+						offset += 15.039;
+					}
+					else
+					{
+						prefix = "";
+					}
 					if(altUP == 0)
 					{
-						me["AltBigD"~place].setText(sprintf("$1D"));
-						me["AltSmallD"~place].setText(altDown);
+						AltBigUP	= "";
+						AltSmallUP	= "0";
+
 					}
-					elsif(math.mod(altUP,500) == 0 and altDown != 0)
+					elsif(math.mod(altUP,500) == 0 and altUP != 0)
 					{
-						me["AltBigD"~place].setText("");
-						me["AltSmallD"~place].setText(altDown);
+						AltBigUP	= sprintf(prefix~"%1d", altUP);
+						AltSmallUP	= "";
+					}
+					elsif(altUP < 1000 and (math.mod(altUP,500)))
+					{
+						AltBigUP	= "";
+						AltSmallUP	= sprintf(prefix~"%1d", int(math.mod(altUP,1000)));
+						offset = -30.078;
+					}
+					elsif((altUP < 10000) and (altUP >= 1000) and (math.mod(altUP,500)))
+					{
+						AltBigUP	= sprintf(prefix~"%1d", int(altUP/1000));
+						AltSmallUP	= sprintf("%1d", int(math.mod(altUP,1000)));
+						offset += 15.039;
 					}
 					else
 					{
-						me["AltBigD"~place].setText("");
-						me["AltSmallD"~place].setText(altDown);
+						AltBigUP	= sprintf(prefix~"%1d", int(altUP/1000));
+						mod = int(math.mod(altUP,1000));
+						AltSmallUP	= sprintf("%1d", mod);
+						offset += 30.078;
 					}
 
-					altDown = altCentral - (place*100);
-					if(altDown == 0)
+					me["AltBigU"~place].setText(AltBigUP);
+					me["AltSmallU"~place].setText(AltSmallUP);
+					me["AltSmallU"~place].setTranslation(offset,0);
+					altDOWN = altCentral - (place*100);
+					offset = -30.078;
+					if (altDOWN < 0)
 					{
-						me["AltBigD"~place].setText("");
-						me["AltSmallD"~place].setText(altDown);
-					}
-					elsif(math.mod(altDown,500) == 0 and altDown != 0)
-					{
-						me["AltBigD"~place].setText("");
-						me["AltSmallD"~place].setText(altDown);
+					    altDOWN = -altDOWN;
+					    prefix = "-";
+					    offset += 15.039;
 					}
 					else
 					{
-						me["AltBigD"~place].setText("");
-						me["AltSmallD"~place].setText(altDown);
+					    prefix = "";
 					}
+					if(altDOWN == 0)
+					{
+					    AltBigDOWN	= "";
+					    AltSmallDOWN	= "0";
 
+					}
+					elsif(math.mod(altDOWN,500) == 0 and altDOWN != 0)
+					{
+					    AltBigDOWN	= sprintf(prefix~"%1d", altDOWN);
+					    AltSmallDOWN	= "";
+					}
+					elsif(altDOWN < 1000 and (math.mod(altDOWN,500)))
+					{
+					    AltBigDOWN	= "";
+					    AltSmallDOWN	= sprintf(prefix~"%1d", int(math.mod(altDOWN,1000)));
+					    offset = -30.078;
+					}
+					elsif((altDOWN < 10000) and (altDOWN >= 1000) and (math.mod(altDOWN,500)))
+					{
+					    AltBigDOWN	= sprintf(prefix~"%1d", int(altDOWN/1000));
+					    AltSmallDOWN	= sprintf("%1d", int(math.mod(altDOWN,1000)));
+					    offset += 15.039;
+					}
+					else
+					{
+					    AltBigDOWN	= sprintf(prefix~"%1d", int(altDOWN/1000));
+					    mod = int(math.mod(altDOWN,1000));
+					    AltSmallDOWN	= sprintf("%1d", mod);
+					    offset += 30.078;
+					}
+					me["AltBigD"~place].setText(AltBigDOWN);
+					me["AltSmallD"~place].setText(AltSmallDOWN);
+					me["AltSmallD"~place].setTranslation(offset,0);
 				}
 			}
 			else
@@ -407,5 +465,31 @@ var PFD = {
 		#print (VSIText ~ " " ~ sprintf("%1.0f", VSI));
 		me.VSIText.setText(VSIText);
 		me.VSI.setTranslation(0,VSIOffset);
+	},
+
+	updateMarkers: func(marker)
+	{
+		if(marker == 0)
+		{
+			me.Marker.hide();
+		}
+		if(marker == 1) #OM
+		{
+			me.Marker.show();
+			me.MarkerBG.setColorFill(0.603921569,0.843137255,0.847058824);
+			me.MarkerText.setText('O');
+		}
+		if(marker == 2) #MM
+		{
+			me.Marker.show();
+			me.MarkerBG.setColorFill(1,0.870588235,0.11372549);
+			me.MarkerText.setText('M');
+		}
+		if(marker == 3) #IM
+		{
+			me.Marker.show();
+			me.MarkerBG.setColorFill(1,1,1);
+			me.MarkerText.setText('I');
+		}
 	}
 };
