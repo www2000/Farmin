@@ -24,11 +24,11 @@
      borderopacity="1"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.828427"
-     inkscape:cx="246.00004"
-     inkscape:cy="671.33976"
+     inkscape:zoom="0.99999995"
+     inkscape:cx="481.29169"
+     inkscape:cy="331.14638"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer16"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -38,7 +38,8 @@
      inkscape:window-y="54"
      inkscape:window-maximized="1"
      inkscape:snap-grids="true"
-     inkscape:snap-to-guides="true">
+     inkscape:snap-to-guides="true"
+     inkscape:object-paths="true">
     <sodipodi:guide
        id="guide3972"
        position="1024,535.27983"
@@ -136,7 +137,7 @@
        orientation="0,1"
        id="guide5262" />
     <sodipodi:guide
-       position="704.75,434.4375"
+       position="1012,259.50001"
        orientation="1,0"
        id="guide4828" />
     <sodipodi:guide
@@ -158,10 +159,6 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="719.83474,526.08747"
-       orientation="1,0"
-       id="guide5137" />
-    <sodipodi:guide
        position="344.25002,454.01955"
        orientation="0,1"
        id="guide5153" />
@@ -176,29 +173,11 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="713.11722,526.08747"
+       position="710,253.89737"
        orientation="1,0"
-       id="guide5189" />
-    <sodipodi:guide
-       position="726.2891,595.07815"
-       orientation="1,0"
-       id="guide5505" />
-    <sodipodi:guide
-       position="737.87504,545.23831"
-       orientation="1,0"
-       id="guide5507" />
-    <sodipodi:guide
-       position="741.32425,601.66409"
-       orientation="1,0"
-       id="guide5509" />
-    <sodipodi:guide
-       position="756.35551,768.04691"
-       orientation="1,0"
-       id="guide5247" />
-    <sodipodi:guide
-       position="752.91408,720.39821"
-       orientation="1,0"
-       id="guide5250" />
+       id="guide5189"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
        position="668.92304,658.13967"
        orientation="1,0"
@@ -211,6 +190,28 @@
        position="681.58206,658.25003"
        orientation="0,1"
        id="guide5259" />
+    <sodipodi:guide
+       position="834.00004,276.00001"
+       orientation="0,1"
+       id="guide5256" />
+    <sodipodi:guide
+       position="919.15047,58"
+       orientation="0,1"
+       id="guide5258"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="13,270.12501"
+       orientation="1,0"
+       id="guide5263"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="228,265.00003"
+       orientation="1,0"
+       id="guide5265"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
   </sodipodi:namedview>
   <defs
      id="defs3142">
@@ -331,27 +332,27 @@
     <image
        sodipodi:absref="/home/jean-paul/fgfs/Farmin/G1000/Pages/PFD/../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd.png"
        xlink:href="../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd.png"
-       y="284.36218"
-       x="-1.0000001"
-       id="image3156"
+       width="1026"
        height="768"
-       width="1026" />
+       id="image3156"
+       x="-1.0000001"
+       y="284.36218" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="Laag 3"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <image
        sodipodi:absref="/home/jean-paul/fgfs/Farmin/G1000/Pages/PFD/../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd2.png"
        xlink:href="../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd2.png"
-       width="1024"
-       height="768"
-       preserveAspectRatio="none"
-       id="image4375"
+       y="-5.6843419e-14"
        x="0"
-       y="-5.6843419e-14" />
+       id="image4375"
+       preserveAspectRatio="none"
+       height="768"
+       width="1024" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -378,12 +379,12 @@
     <image
        sodipodi:absref="/home/jean-paul/fgfs/Farmin/G1000/Pages/PFD/../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd4.png"
        xlink:href="../../../../../Bureaublad/fggfs/garmin_flightdeck/notes/pfd4.png"
-       width="1024"
-       height="768"
-       preserveAspectRatio="none"
-       id="image4526"
+       y="2.8421709e-14"
        x="0"
-       y="2.8421709e-14" />
+       id="image4526"
+       preserveAspectRatio="none"
+       height="768"
+       width="1024" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -411,8 +412,7 @@
      style="display:inline;opacity:1"
      inkscape:label="horizon"
      id="layer4"
-     inkscape:groupmode="layer"
-     sodipodi:insensitive="true">
+     inkscape:groupmode="layer">
     <g
        style="display:inline"
        id="Horizon"
@@ -5277,6 +5277,27 @@
            id="tspan5255"
            sodipodi:role="line">M</tspan></text>
     </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer16"
+     inkscape:label="Map">
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="MAPR"
+       width="302"
+       height="218.00002"
+       x="710"
+       y="492"
+       inkscape:label="#MAPR" />
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="MAPL"
+       width="215"
+       height="218.00002"
+       x="13"
+       y="492"
+       inkscape:label="#MAPL" />
   </g>
   <g
      inkscape:groupmode="layer"

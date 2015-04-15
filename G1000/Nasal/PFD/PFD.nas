@@ -30,6 +30,7 @@ var PFD = {
 		svg_keys ~= ["AltSmallD1","AltSmallD2","AltSmallD3","AltSmallD4","AltSmallD5","AltSmallD6",];
 		svg_keys ~= ["AltBigC","AltSmallC","LintAlt"];
 		svg_keys ~= ["Marker","MarkerBG","MarkerText"];
+		svg_keys ~= ["MAPL","MAPR"];
 
 		svg_keys = svg_keys ~[];
 		foreach(var key; svg_keys) {
@@ -39,6 +40,7 @@ var PFD = {
 			m[key].updateCenter();
 			m[key].trans	= m[key].createTransform();
 			m[key].rot		= m[key].createTransform();
+			m[key].hide();
 
 		};
 		#5,715272637
@@ -57,79 +59,91 @@ var PFD = {
 
 		m.LintAlt.set("clip", "rect(114px, 1024px, 455px, 0px)");
 		#note to my self clip for the Pitch Scale is: top = 134 right = 590 bottem = 394 left = 330
+
+		#Enable map
+		m.MAPdata = pfd.createChild("map");
+		m.MAPdata.setController("Aircraft position");
+		m.MAPdata.setRange(25);
+		m.MAPdata.setTranslation(861,601);
+		var r = func(name,vis=1,zindex=nil) return caller(0)[0];
+		foreach(var type; [r('TFC'), r('APS')] )
+			m.MAPdata.addLayer(factory: canvas.SymbolLayer, type_arg: type.name, visible: type.vis, priority: type.zindex,);
+		m.MAPdata.set("clip", "rect(493, 1011, 709, 711)");
+		m.MAPdata.hide();
+
 		return m
 	},
 
 	updateAi: func(roll,pitch){
 		if (pitch > 80 )
 		{
-			pitch = 80;
+			var pitch = 80;
 		}
 		elsif(pitch < -80)
 		{
-			pitch = -80;
+			var pitch = -80;
 		}
 
-		RollR = -roll*D2R;
+		var RollR = -roll*D2R;
 
-		AP	= 57.5;
-		AN	= 27.5;
-		BP	= 37.5;
-		BN	= 40;
+		var AP	= 57.5;
+		var AN	= 27.5;
+		var BP	= 37.5;
+		var BN	= 40;
 
-		HLAPRN = math.sqrt(1/(math.pow(math.cos(RollR)/AP,2)+(math.pow(math.sin(RollR)/BN,2))));
-		HLANBN = math.sqrt(1/(math.pow(math.cos(RollR)/AN,2)+(math.pow(math.sin(RollR)/BN,2))));
-		HLAPBP = math.sqrt(1/(math.pow(math.cos(RollR)/AP,2)+(math.pow(math.sin(RollR)/BP,2))));
-		HLANBP = math.sqrt(1/(math.pow(math.cos(RollR)/AN,2)+(math.pow(math.sin(RollR)/BP,2))));
+		var HLAPRN = math.sqrt(1/(math.pow(math.cos(RollR)/AP,2)+(math.pow(math.sin(RollR)/BN,2))));
+		var HLANBN = math.sqrt(1/(math.pow(math.cos(RollR)/AN,2)+(math.pow(math.sin(RollR)/BN,2))));
+		var HLAPBP = math.sqrt(1/(math.pow(math.cos(RollR)/AP,2)+(math.pow(math.sin(RollR)/BP,2))));
+		var HLANBP = math.sqrt(1/(math.pow(math.cos(RollR)/AN,2)+(math.pow(math.sin(RollR)/BP,2))));
 
-		RAP	= ((roll > -90) and (roll <= 90));
-		RAN = ((roll <= -90) or (roll > 90));
-		RBP = (roll >= 0);
-		RBN = (roll < 0);
+		var RAP	= ((roll > -90) and (roll <= 90));
+		var RAN = ((roll <= -90) or (roll > 90));
+		var RBP = (roll >= 0);
+		var RBN = (roll < 0);
 		if((pitch >= 0) and (RAP and RBN))
 		{
-			limit = HLAPRN;
+			var limit = HLAPRN;
 		}
 		elsif((pitch >= 0) and (RAN and RBN))
 		{
-			limit = HLANBN;
+			var limit = HLANBN;
 		}
 		elsif((pitch >= 0)and (RAP and RBP))
 		{
-			limit = HLAPBP;
+			var limit = HLAPBP;
 		}
 		elsif((pitch >= 0)and (RAN and RBP))
 		{
-			limit = HLANBP;
+			var limit = HLANBP;
 		}
 		elsif((pitch < 0) and (RAN and RBP))
 		{
-			limit = HLAPRN;
+			var limit = HLAPRN;
 		}
 		elsif((pitch < 0) and (RAP and RBP))
 		{
-			limit = HLANBN;
+			var limit = HLANBN;
 		}
 		elsif((pitch < 0)and (RAN and RBN))
 		{
-			limit = HLAPBP;
+			var limit = HLAPBP;
 		}
 		elsif((pitch < 0)and (RAP and RBN))
 		{
-			limit = HLANBP;
+			var limit = HLANBP;
 		}
 
 		if(pitch > limit)
 		{
-			Hpitch = limit;
+			var Hpitch = limit;
 		}
 		elsif(-pitch > limit)
 		{
-			Hpitch = -limit;
+			var Hpitch = -limit;
 		}
 		else
 		{
-			Hpitch = pitch;
+			var Hpitch = pitch;
 		}
 
 		me.Horizon.rot.setRotation(RollR, me.PitchScale.getCenter());
@@ -140,7 +154,7 @@ var PFD = {
 		me.PitchScale.rot.setRotation(RollR, me.PitchScale.getCenter());
 		me.PitchScale.trans.setTranslation(0,pitch*6.8571428);
 
-		brot = me.bankPointer.getCenter();
+		var brot = me.bankPointer.getCenter();
 		me.bankPointer.rot.setRotation(RollR,brot);
 		me.bankPointerLineL.rot.setRotation(RollR,brot);
 		me.bankPointerLineR.rot.setRotation(RollR,brot);
@@ -173,12 +187,12 @@ var PFD = {
 		if(speed != nil)
 		{
 			me.data.speed = speed;
-			Offset1 = 0;
-			Offset10 = 0;
+			var Offset1 = 0;
+			var Offset10 = 0;
 
 			if (speed < 20)
 			{
-				speed = 20;
+				var speed = 20;
 				me.LindSpeed.set("clip", "rect(114px, 239px, 284,5px, 154px)");
 			}
 			elsif (speed >= 20 and  speed < 50)
@@ -199,27 +213,27 @@ var PFD = {
 				me.LindSpeed.setTranslation(0,114,245);
 			};
 
-			speed1		= math.mod(speed,10);
-			speed10		= int(math.mod(speed/10,10));
-			speed100	= int(math.mod(speed/100,10));
-			speed0_1 	= speed1 - int(speed1);
+			var speed1		= math.mod(speed,10);
+			var speed10		= int(math.mod(speed/10,10));
+			var speed100	= int(math.mod(speed/100,10));
+			var speed0_1 	= speed1 - int(speed1);
 			if (speed1 >= 9)
 			{
-				speed10 += speed0_1;
+				var speed10 += speed0_1;
 			}
 
 			if (speed1 >= 9 and speed10 >= 9)
 			{
-				speed100 += speed0_1;
+				var speed100 += speed0_1;
 			}
 
 			if(speed >= 10)
 			{
-				Offset1 = 10;
+				var Offset1 = 10;
 			}
 			if(speed >= 100)
 			{
-				Offset10 = 10;
+				var Offset10 = 10;
 			}
 			me.LindSpeed.setTranslation(0,speed*5.71225);
 			me.SpeedtLint1.setTranslation(0,(speed1+Offset1)*36);
@@ -252,52 +266,52 @@ var PFD = {
 			me.AltLint10000.show();
 			if(Alt> -1000 and Alt< 1000000)
 			{
-				Offset10 = 0;
-				Offset100 = 0;
-				Offset1000 = 0;
+				var Offset10 = 0;
+				var Offset100 = 0;
+				var Offset1000 = 0;
 				if(Alt< 0)
 				{
-					Ne = 1;
-					Alt= -Alt
+					var Ne = 1;
+					var Alt= -Alt
 				}
 				else
 				{
-					Ne = 0;
+					var Ne = 0;
 				}
 
-				Alt10		= math.mod(Alt,100);
-				Alt100		= int(math.mod(Alt/100,10));
-				Alt1000		= int(math.mod(Alt/1000,10));
-				Alt10000	= int(math.mod(Alt/10000,10));
-				Alt20 		= math.mod(Alt10,20)/20;
+				var Alt10		= math.mod(Alt,100);
+				var Alt100		= int(math.mod(Alt/100,10));
+				var Alt1000		= int(math.mod(Alt/1000,10));
+				var Alt10000	= int(math.mod(Alt/10000,10));
+				var Alt20 		= math.mod(Alt10,20)/20;
 				if (Alt10 >= 80)
 				{
-					Alt100 += Alt20
+					var Alt100 += Alt20
 				};
 
 				if (Alt10 >= 80 and Alt100 >= 9)
 				{
-					Alt1000 += Alt20
+					var Alt1000 += Alt20
 				};
 
 				if (Alt10 >= 80 and Alt100 >= 9 and Alt1000 >= 9)
 				{
-					Alt10000 += Alt20
+					var Alt10000 += Alt20
 				};
 
 				if (Alt> 100)
 				{
-					Offset10 = 100;
+					var Offset10 = 100;
 				}
 
 				if (Alt> 1000)
 				{
-					Offset100 = 10;
+					var Offset100 = 10;
 				}
 
 				if (Alt> 10000)
 				{
-					Offset1000 = 10;
+					var Offset1000 = 10;
 				}
 
 				if(!Ne)
@@ -323,93 +337,93 @@ var PFD = {
 				var placeInList = [1,2,3,4,5,6];
 				foreach(var place; placeInList)
 				{
-					altUP = altCentral + (place*100);
-					offset = -30.078;
+					var altUP = altCentral + (place*100);
+					var offset = -30.078;
 					if (altUP < 0)
 					{
-						altUP = -altUP;
-						prefix = "-";
-						offset += 15.039;
+						var altUP = -altUP;
+						var prefix = "-";
+						var offset += 15.039;
 					}
 					else
 					{
-						prefix = "";
+						var prefix = "";
 					}
 					if(altUP == 0)
 					{
-						AltBigUP	= "";
-						AltSmallUP	= "0";
+						var AltBigUP	= "";
+						var AltSmallUP	= "0";
 
 					}
 					elsif(math.mod(altUP,500) == 0 and altUP != 0)
 					{
-						AltBigUP	= sprintf(prefix~"%1d", altUP);
-						AltSmallUP	= "";
+						var AltBigUP	= sprintf(prefix~"%1d", altUP);
+						var AltSmallUP	= "";
 					}
 					elsif(altUP < 1000 and (math.mod(altUP,500)))
 					{
-						AltBigUP	= "";
-						AltSmallUP	= sprintf(prefix~"%1d", int(math.mod(altUP,1000)));
-						offset = -30.078;
+						var AltBigUP	= "";
+						var AltSmallUP	= sprintf(prefix~"%1d", int(math.mod(altUP,1000)));
+						var offset = -30.078;
 					}
 					elsif((altUP < 10000) and (altUP >= 1000) and (math.mod(altUP,500)))
 					{
-						AltBigUP	= sprintf(prefix~"%1d", int(altUP/1000));
-						AltSmallUP	= sprintf("%1d", int(math.mod(altUP,1000)));
-						offset += 15.039;
+						var AltBigUP	= sprintf(prefix~"%1d", int(altUP/1000));
+						var AltSmallUP	= sprintf("%1d", int(math.mod(altUP,1000)));
+						var offset += 15.039;
 					}
 					else
 					{
-						AltBigUP	= sprintf(prefix~"%1d", int(altUP/1000));
-						mod = int(math.mod(altUP,1000));
-						AltSmallUP	= sprintf("%1d", mod);
-						offset += 30.078;
+						var AltBigUP	= sprintf(prefix~"%1d", int(altUP/1000));
+						var mod = int(math.mod(altUP,1000));
+						var AltSmallUP	= sprintf("%1d", mod);
+						var offset += 30.078;
 					}
 
 					me["AltBigU"~place].setText(AltBigUP);
 					me["AltSmallU"~place].setText(AltSmallUP);
 					me["AltSmallU"~place].setTranslation(offset,0);
-					altDOWN = altCentral - (place*100);
-					offset = -30.078;
+					var altDOWN = altCentral - (place*100);
+					var offset = -30.078;
 					if (altDOWN < 0)
 					{
-					    altDOWN = -altDOWN;
-					    prefix = "-";
-					    offset += 15.039;
+						var altDOWN = -altDOWN;
+						var prefix = "-";
+						var offset += 15.039;
 					}
 					else
 					{
-					    prefix = "";
+						var prefix = "";
 					}
 					if(altDOWN == 0)
 					{
-					    AltBigDOWN	= "";
-					    AltSmallDOWN	= "0";
+						var AltBigDOWN	= "";
+						var AltSmallDOWN	= "0";
 
 					}
 					elsif(math.mod(altDOWN,500) == 0 and altDOWN != 0)
 					{
-					    AltBigDOWN	= sprintf(prefix~"%1d", altDOWN);
-					    AltSmallDOWN	= "";
+						var AltBigDOWN	= sprintf(prefix~"%1d", altDOWN);
+						var AltSmallDOWN	= "";
 					}
 					elsif(altDOWN < 1000 and (math.mod(altDOWN,500)))
 					{
-					    AltBigDOWN	= "";
-					    AltSmallDOWN	= sprintf(prefix~"%1d", int(math.mod(altDOWN,1000)));
-					    offset = -30.078;
+						var AltBigDOWN	= "";
+						var AltSmallDOWN	= sprintf(prefix~"%1d", int(math.mod(altDOWN,1000)));
+						var offset = -30.078;
 					}
 					elsif((altDOWN < 10000) and (altDOWN >= 1000) and (math.mod(altDOWN,500)))
 					{
-					    AltBigDOWN	= sprintf(prefix~"%1d", int(altDOWN/1000));
-					    AltSmallDOWN	= sprintf("%1d", int(math.mod(altDOWN,1000)));
-					    offset += 15.039;
+						var AltBigDOWN	= sprintf(prefix~"%1d", int(altDOWN/1000));
+						var AltSmallDOWN	= sprintf("%1d", int(math.mod(altDOWN,1000)));
+						var offset += 15.039;
 					}
 					else
 					{
-					    AltBigDOWN	= sprintf(prefix~"%1d", int(altDOWN/1000));
-					    mod = int(math.mod(altDOWN,1000));
-					    AltSmallDOWN	= sprintf("%1d", mod);
-					    offset += 30.078;
+						var AltBigDOWN	= sprintf(prefix~"%1d", int(altDOWN/1000));
+						var mod = int(math.mod(altDOWN,1000));
+						var AltSmallDOWN	= sprintf("%1d", mod);
+						var offset += 30.078;
 					}
 					me["AltBigD"~place].setText(AltBigDOWN);
 					me["AltSmallD"~place].setText(AltSmallDOWN);
@@ -434,33 +448,33 @@ var PFD = {
 
 			if(VSI > 4250)
 			{
-				VSIOffset = -148.21875;
+				var VSIOffset = -148.21875;
 			}
 			elsif(VSI < -4250)
 			{
-				VSIOffset = 148.21875;
+				var VSIOffset = 148.21875;
 			}
 			else
 			{
-				VSIOffset = (-VSI)*0.034875;
+				var VSIOffset = (-VSI)*0.034875;
 			};
 			if((VSI < 100) and (VSI > -100))
 			{
-				VSIText = "";
+				var VSIText = "";
 			}
 			elsif((VSI < -10000) or (VSI > 10000))
 			{
-				VSIText = "----";
+				var VSIText = "----";
 			}
 			else
 			{
-				VSIText = sprintf("%1d",int(VSI/50)*50);
+				var VSIText = sprintf("%1d",int(VSI/50)*50);
 			}
 		}
 		else
 		{
-			VSIText = "";
-			VSIOffset = 0
+			var VSIText = "";
+			var VSIOffset = 0
 		};
 		#print (VSIText ~ " " ~ sprintf("%1.0f", VSI));
 		me.VSIText.setText(VSIText);
@@ -491,5 +505,15 @@ var PFD = {
 			me.MarkerBG.setColorFill(1,1,1);
 			me.MarkerText.setText('I');
 		}
-	}
+	},
+
+	#SetMap: func(post)
+	#{
+	#	if(post = 1)
+
+	#	elsif(post = 2)
+	#	{
+
+	#	}
+	#},
 };

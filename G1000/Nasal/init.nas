@@ -10,8 +10,8 @@ var GDU104XINIT = {
                 "mipmapping": 1
         });
         m.canvas.addPlacement({"node": "Screen", "parent":"screen"~screenID});
-        #m.canvas.setColorBackground(0.12,0.20,0.16);
-        m.canvas.setColorBackground(1,1,1);
+        m.canvas.setColorBackground(0.12,0.20,0.16);
+        #m.canvas.setColorBackground(1,1,1);
         m.croot = m.canvas.createGroup();
 
         if(mode == "PFD"){
