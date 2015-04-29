@@ -31,6 +31,8 @@ var PFD = {
 		svg_keys ~= ["AltBigC","AltSmallC","LintAlt"];
 		svg_keys ~= ["Marker","MarkerBG","MarkerText"];
 		svg_keys ~= ["MAPL","MAPR"];
+		svg_keys ~= ["ILS"];
+		svg_keys ~= ["HSBug"];
 
 		svg_keys = svg_keys ~[];
 		foreach(var key; svg_keys) {
@@ -40,7 +42,7 @@ var PFD = {
 			m[key].updateCenter();
 			m[key].trans	= m[key].createTransform();
 			m[key].rot		= m[key].createTransform();
-			m[key].hide();
+			#m[key].hide();
 
 		};
 		#5,715272637
@@ -61,15 +63,15 @@ var PFD = {
 		#note to my self clip for the Pitch Scale is: top = 134 right = 590 bottem = 394 left = 330
 
 		#Enable map
-		m.MAPdata = pfd.createChild("map");
-		m.MAPdata.setController("Aircraft position");
-		m.MAPdata.setRange(25);
-		m.MAPdata.setTranslation(861,601);
+		m.MAPd = pfd.createChild("map");
+		m.MAPd.setController("Aircraft position");
+		m.MAPd.setRange(25);
+		m.MAPd.setTranslation(861,601);
 		var r = func(name,vis=1,zindex=nil) return caller(0)[0];
 		foreach(var type; [r('TFC'), r('APS')] )
-			m.MAPdata.addLayer(factory: canvas.SymbolLayer, type_arg: type.name, visible: type.vis, priority: type.zindex,);
-		m.MAPdata.set("clip", "rect(493, 1011, 709, 711)");
-		m.MAPdata.hide();
+			m.MAPd.addLayer(factory: canvas.SymbolLayer, type_arg: type.name, visible: type.vis, priority: type.zindex,);
+		m.MAPd.set("clip", "rect(493, 1011, 709, 711).setRotation(45+D2R,[0,0])");
+		#m.MAPd.hide();
 
 		return m
 	},
@@ -178,7 +180,15 @@ var PFD = {
 
 	UpdateHeading: func(Heading)
 	{
+		HSB = Heading + -45;
+		if(HSB >= 360)
+			HSB = HSB -360;
+		me.HSBug.setRotation(-HSB*D2R);
 		me.Compass.setRotation(-Heading*D2R);
+		if (Heading == 0)
+		{
+			#Heading = 360;
+		}
 		me.CompassText.setText(sprintf("%03.0f°",math.floor(Heading)));
 	},
 
@@ -507,13 +517,31 @@ var PFD = {
 		}
 	},
 
-	#SetMap: func(post)
-	#{
-	#	if(post = 1)
+	updateILS: func(ils){
+		if (ils != nil)
+		{
+			me.ILS.setTranslation(0,-(ils*86.984));
+		}
+		else
+		{
+			me.ILS.setTranslation(0,0);
+		}
+	},
 
-	#	elsif(post = 2)
-	#	{
+	SetMap: func(post)
+	{
+		if(post = 1)
+		{
+			#open map on the left
+		}
+		elsif(post = 2)
+		{
+			#open map on the right
+		}
+		elsif(post = 0)
+		{
+			#close map
+		}
+	},
 
-	#	}
-	#},
 };
