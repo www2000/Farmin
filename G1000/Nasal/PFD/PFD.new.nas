@@ -35,6 +35,7 @@ var PFD = {
         canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
 
 
+
         m.screen = {};
 
 
@@ -59,13 +60,12 @@ var PFD = {
     UpdateVSI: func(VSI){
         me.data.VSI = VSI;
     },
-    UpdateILS: func(){
-
-    },
-    UpdateVOR1: func():{
+    UpdateVOR1: func(){
+      me.VOR.
+    }
+    UpdateADF: func(){
 
     }
-    UpdateADF func:
     UpdateMarkers: func(){
 
     }
