@@ -13,7 +13,7 @@ var PFD = {
 			elsif( family == "BoeingCDULarge" and weight == "normal" )
 				return "LiberationFonts/LiberationSans-Regular.ttf";
 
-		};
+		}
 		canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
 		var Speed = {};
 
@@ -35,6 +35,9 @@ var PFD = {
 		svg_keys ~= ["HSBug"];
 
 		svg_keys = svg_keys ~[];
+
+
+
 		foreach(var key; svg_keys) {
 			print(key);
 			m[key] = nil;
@@ -45,9 +48,21 @@ var PFD = {
 			#m[key].hide();
 
 		};
-		#5,715272637
 
+
+
+		#5,715272637
+		svg_keys = ["Lind"];
+
+		foreach(var key; svg_keys) {
+			print(key);
+			m[key] = nil;
+			m[key] = pfd.getElementById(key);
+			#m[key].hide();
+
+		};
 		#clip
+		#test = m.Horizon.set("clip", 'rect,(128,896,640,128)');
 		m.bankPointerLineL.set("clip", "rect(0,1024,768,459.500)");
 		m.bankPointerLineR.set("clip", "rect(0,459.500,768,0)");
 		m.PitchScale.set("clip", "rect(134,590,394,330)");
@@ -183,6 +198,8 @@ var PFD = {
 		HSB = Heading + -45;
 		if(HSB >= 360)
 			HSB = HSB -360;
+		elsif (HSB < 0)
+			HSB = HSB + 360;
 		me.HSBug.setRotation(-HSB*D2R);
 		me.Compass.setRotation(-Heading*D2R);
 		if (Heading == 0)
