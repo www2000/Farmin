@@ -31,14 +31,13 @@ var PFD = {
 			elsif( family == "BoeingCDULarge" and weight == "normal" )
 				return "LiberationFonts/LiberationSans-Regular.ttf";
 		};
-
         canvas.parsesvg(pfd, "Aircraft/Instruments-3d/Farmin/G1000/Pages/PFD/PFD.svg", {'font-mapper': font_mapper});
+
+        #load
 
 
 
         m.screen = {};
-
-
     },
 
     UpdateAirSpeed: func(AirSpeed){
@@ -60,15 +59,19 @@ var PFD = {
     UpdateVSI: func(VSI){
         me.data.VSI = VSI;
     },
-    UpdateVOR1: func(){
-      me.VOR.
-    }
-    UpdateADF: func(){
-
-    }
+    UpdateVOR1: func(VOR){
+      me.VOR1 = VOR
+    },
+    UpdateVOR2: func(VOR){
+      me.VOR2 = VOR
+    },
+    UpdateADF: func(ADF){
+      me.ADF = ADF
+    },
     UpdateMarkers: func(){
 
-    }
+    },
+
 
 
 }

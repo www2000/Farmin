@@ -40,14 +40,14 @@ var GDU104XINIT = {
 };
 
 var updater = func(){
-    ias =getprop("velocities/airspeed-kt");
-    pitch = getprop("orientation/pitch-deg");
-    roll = getprop("orientation/roll-deg");
-    heading = getprop("orientation/heading-deg");
-    alt = getprop("instrumentation/altimeter/indicated-altitude-ft");
-    slipskid = getprop("instrumentation/slip-skid-ball/indicated-slip-skid");
-    VSI = getprop("instrumentation/vertical-speed-indicator/indicated-speed-fpm");
-    ILS = getprop("instrumentation/nav/gs-needle-deflection-norm");
+    ias =getprop("velocities/airspeed-kt") or 0.00;
+    pitch = getprop("orientation/pitch-deg")  or 0.00;
+    roll = getprop("orientation/roll-deg")  or 0.00;
+    heading = getprop("orientation/heading-deg")  or 0.00;
+    alt = getprop("instrumentation/altimeter/indicated-altitude-ft")  or 0.00;
+    slipskid = getprop("instrumentation/slip-skid-ball/indicated-slip-skid")  or 0.00;
+    VSI = getprop("instrumentation/vertical-speed-indicator/indicated-speed-fpm")  or 0.00;
+    ILS = getprop("instrumentation/nav/gs-needle-deflection-norm")  or 0.00;
     screen1.PFD.updateAi(roll,pitch);
     screen1.PFD.updateSpeed(ias);
     screen1.PFD.UpdateHeading(heading);
