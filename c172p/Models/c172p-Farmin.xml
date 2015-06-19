@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <model>
+  <path>Aircraft/Instruments-3d/Farmin/Display/GDU104X/GDU-1045.screen1.xml</path>
+  <offsets>
+     <x-m> -0.30</x-m>
+     <y-m> -0.26 </y-m>
+     <z-m> -0.07 </z-m>
+     <roll-deg>    0.0 </roll-deg>
+     <pitch-deg>   0.0 </pitch-deg>
+     <heading-deg> 0.0 </heading-deg>
+   </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Instruments-3d/Farmin/Audio/GMA-1347/GMA-1347.xml</path>
+  <offsets>
+     <x-m> -0.30</x-m>
+     <y-m> -0.10 </y-m>
+     <z-m> -0.07 </z-m>
+     <roll-deg>    0.0 </roll-deg>
+     <pitch-deg>   0.0 </pitch-deg>
+     <heading-deg> 0.0 </heading-deg>
+   </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Instruments-3d/Farmin/Display/GDU104X/GDU-1045.screen2.xml</path>
+  <offsets>
+     <x-m> -0.30</x-m>
+     <y-m> 0.06 </y-m>
+     <z-m> -0.07 </z-m>
+     <roll-deg>    0.0 </roll-deg>
+     <pitch-deg>   0.0 </pitch-deg>
+     <heading-deg> 0.0 </heading-deg>
+   </offsets>
+ </model>
+
+ <model>
+   <path>Aircraft/c172p/Models/c172p.xml</path>
+   <offsets>
+     <x-m> 0.0 </x-m>
+     <y-m> 0.0 </y-m>
+     <z-m> 0.0 </z-m>
+     <roll-deg>    0.0 </roll-deg>
+     <pitch-deg>   0.0 </pitch-deg>
+     <heading-deg> 0.0 </heading-deg>
+   </offsets>
+ </model>
+</PropertyList>
