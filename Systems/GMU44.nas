@@ -1,5 +1,5 @@
 #
-#	Farmin GRS77/GMU44
+#	Farmin GMU44
 #
 #
 
@@ -86,11 +86,11 @@ var GMU44 = {
 		if(power == 0 or serviceable == 0)
 		{
 			setprop('/systems/GMU44['~me.module~']/heading', 0);
-			settimer(func { me.watchdog() }, 0.01);
+			settimer(func { me.watchdog() }, 0.05);
 		}
 		else
 		{
-			settimer(func { me.update() },0.04);
+			settimer(func { me.update() },0.05);
 		}
 	},
 	watchdog: func()
@@ -105,7 +105,7 @@ var GMU44 = {
 		else
 		{
 			settimer(func { me.watchdog()}, 1);
-		}
+		};
 
 	},
 	run: func()
@@ -117,3 +117,6 @@ var GMU44 = {
 #test delete in the further.
 test = GMU44.new(0);
 test.run();
+
+test2 = GMU44.new(1);
+test2.run();
