@@ -10,7 +10,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
 
 - Main model based on the original c172p by Jon Check
 - Enhanced model by thevirtualfer
-- Small details and systems by ludomotico (Juan Vera) and gsagostinho 
+- Small details and systems by ludomotico (Juan Vera) and gsagostinho
 
 ************************************************************************
 -->
@@ -20,23 +20,23 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
  <sim>
 
   <description>Cessna 172P Farmin test</description>
-  <long-description>The Cessna 172 Skyhawk is a four-seat, single-engine, high-wing fixed-wing aircraft. 
+  <long-description>The Cessna 172 Skyhawk is a four-seat, single-engine, high-wing fixed-wing aircraft.
       First flown in 1955 and still in production, more Cessna 172s have been built than any other aircraft.
   </long-description>
-  
+
   <fr>
-      <long-description>Le Cessna 172 Skyhawk est un avion quadriplace, monomoteur à aile haute. 
+      <long-description>Le Cessna 172 Skyhawk est un avion quadriplace, monomoteur à aile haute.
         Il effectua son premier vol en 1955 et est toujours en production, plus de Cessna 172 ont été construits que tout autres avions.
         </long-description>
   </fr>
-  
+
   <es>
     <long-description>La Cessna 172 Skyhawk es un avión de cuatro plazas, monomotor y de ala alta.
       Se empezó a producir en 1955 y, con equipos modernizados, aún sigue en producción.
       La Cessna 172 es el avión del que unidades se han construido en la historia.
       </long-description>
   </es>
-  
+
   <tags>
       <tag>ga</tag>
       <tag>cessna</tag>
@@ -44,7 +44,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
       <tag>single-engine</tag>
       <tag>fixed-gear</tag>
   </tags>
-  
+
   <author>Original by David Megginson, gsagostinho (Gilberto Agostinho), wlbragg (Wayne Bragg), Juanvvc (Juan Vera del Campo), onox, thevirtualfer, Dany93 (Daniel Dubreuil), dg-505 (Jonathan Schellhase), IHAM-COL (Israel Hernandez), tigert (Tuomas Kuosmanen), AndersG (Anders Gidenstam), wkitty42 (Waldo Kitty), algefaen</author>
   <status>advanced production</status>
   <aircraft-version>3.6</aircraft-version>
@@ -56,7 +56,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
   </rating>
 
   <!--variant-of>c172p</variant-of-->
-  
+
   <flight-model archive="y">jsb</flight-model>
   <aero archive="y">c172p</aero>
 
@@ -79,7 +79,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
       <file type="string">4X-CHV_HD_livery</file>
       <index type="int">0</index>
     </liverywing>
-	
+
 	<liveryfloat>
       <file type="string">4X-CHV_HD_livery</file>
       <index type="int">0</index>
@@ -126,7 +126,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
       </sound>
     </c172p>
     <hide-yoke type="bool">false</hide-yoke>
-    
+
     <crew>
       <pilot n="0">
 		<pose include = "Models/Human/pose-pilot.xml"></pose>
@@ -141,10 +141,10 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
 		<equipment>0</equipment>
       </pilot>
     </crew>
-	
+
 	<!-- human models persistent menu choice -->
 	<occupants type="bool">0</occupants>
-  
+
     <!-- an exit for the walker -->
     <map>
       <default_exit>
@@ -153,7 +153,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
       </default_exit>
     </map>
   </model>
-  
+
   <aircraft-data>
     <path>/sim/rendering/shadow</path>
     <path>/sim/rendering/shadow-volume</path>
@@ -176,13 +176,13 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
   </startup>
 
   <!-- hide the 2D panel -->
- 
+
   <panel>
    <visibility type="bool" archive="y">false</visibility>
   </panel>
 
   <!-- position the pilot viewpoint and angle -->
- 
+
   <view>
    <internal type="bool" archive="y">true</internal>
    <config>
@@ -207,7 +207,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
       <!-- model defined later in the nasal section of this file. -->
       <path></path>
     </electrical>
-     
+
     <!-- needed by shadows in ALS: http://forum.flightgear.org/viewtopic.php?f=4&t=25157&start=75#p232120 -->
 	<!-- and other ground effects -->
     <property-rule n="101">
@@ -224,11 +224,11 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
   </sound>
 
   <help include="c172-help.xml"/>
-  
+
   <checklists include="c172-checklists.xml"/>
 
   <tutorials include="Tutorials/c172-tutorials.xml"/>
-  
+
   <dimensions>
     <radius-m type="double">5</radius-m>
   </dimensions>
@@ -246,7 +246,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <float n="5" alias="/systems/electrical/outputs/landing-lights"/>
 		<float n="6" alias="/fdm/jsbsim/hydro/spray-wake-speed-kt-actual"/>
 		<float n="7" alias="/fdm/jsbsim/hydro/left-ground-effect-speed-kt-actual"/>
-		<float n="8" alias="/fdm/jsbsim/hydro/right-ground-effect-speed-kt-actual"/>	
+		<float n="8" alias="/fdm/jsbsim/hydro/right-ground-effect-speed-kt-actual"/>
 		<float n="9" alias="/fdm/jsbsim/ground/tail-ground-effect-speed-kt-actual"/>
 		<float n="10" alias="/fdm/jsbsim/ground/left-wing-ground-effect-speed-kt-actual"/>
 		<float n="11" alias="/fdm/jsbsim/ground/right-wing-ground-effect-speed-kt-actual"/>
@@ -423,7 +423,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
  </engines>
 
  <nasal>
- 
+
     <c172p>
       <file>Nasal/liveries.nas</file>
       <file>Nasal/immat.nas</file>
@@ -455,11 +455,14 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
     <file>Aircraft/Instruments-3d/Farmin/G1000/Nasal/PFD/PFD.nas</file>
     <file>Aircraft/Instruments-3d/Farmin/G1000/Nasal/init.nas</file>
     <!--<script><![CDATA[
-    
+
         ]]>
    </script>-->
   </Farmin>
-  
+  <GRS77>
+    <file>Aircraft/Instruments-3d/Farmin/Systems/GRS77_GMU44.nas</file>
+  </GRS77>
+
   <tyresmoke>
    <file>Nasal/tyresmoke.nas</file>
   </tyresmoke>
@@ -469,7 +472,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
   </hydrodynamics>
 
  </nasal>
- 
+
  <payload>
   <weight>
    <name type="string">Pilot</name>
@@ -562,7 +565,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
       <spray-density type="double">0</spray-density>
     </gear>
   </gear>
-  
+
  <!-- Damage Mod -->
   <fdm>
     <jsbsim>
@@ -575,7 +578,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
 			</unit>
 			<unit n="2">
 			  <broken type="bool">0</broken>
-			</unit>	
+			</unit>
 		</gear>
 		<contact>
 			<unit n="4">
@@ -608,5 +611,5 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
     </jsbsim>
   </fdm>
   <!-- End Damage Mod -->
-  
+
 </PropertyList>
