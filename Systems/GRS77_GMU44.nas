@@ -12,8 +12,8 @@ var smooth = {
 	new: func(samplesSize)
 	{
 		var m = { parents: [smooth]};
-		m.samples = setsize([], samplesSize);
 		m.samplesSize = samplesSize;
+		m.reset();
 		m.dataLowerbound  = (samplesSize*15)/100;
 		m.dataUppeerbound = samplesSize - m.dataLowerbound;
 		return m
@@ -23,12 +23,15 @@ var smooth = {
 		samples = subvec(me.samples,1);
 		samples = append(samples,rawIn);
 		me.samples = samples;
-		sortdata = sort(samples);
-		sortdata = subvec(sortdata,me.dataLowerbound,me.dataUppeerbound);
-		k = size(sortdata);
-		total = 0
-		foreach()
-		return ;
+		sortsamples = sort(samples,me.sort_rules);
+		sortsamples = subvec(sortsamples,me.dataLowerbound,me.dataUppeerbound);
+		k = size(sortsamples);
+		total = 0;
+		foreach(j; sortsamples)
+		{
+			total += j;
+		}
+		return total/k;
 	},
 	sort_rules: func(a, b){
 		if(a < b){
@@ -41,7 +44,13 @@ var smooth = {
 	},
 	reset: func()
 	{
-		m.samples = setsize([], m.samplesSize);
+		me.samples = setsize([], me.samplesSize);
+		key = 0;
+		foreach(i;me.samples)
+		{
+			me.samples[key] = 0;
+			key+=1;
+		}
 	}
 };
 
@@ -51,6 +60,7 @@ var GMU44 = {
 		var m = { parents: [GMU44] };
 		m.module = module;
 		props.globals.initNode('/instrumentation/GMU44['~m.module~']/heading',0,'DOUBLE');
+		props.globals.initNode('/instrumentation/GMU44['~m.module~']/headingRaw',0,'DOUBLE');
 		props.globals.initNode('/instrumentation/GMU44['~m.module~']/serviceable', 1, "BOOL");
 		props.globals.initNode('/instrumentation/GMU44['~m.module~']/operable', 0, "BOOL");
 		m.smooth = smooth.new(30);
@@ -71,6 +81,7 @@ var GMU44 = {
 		};
 		heading = me.smooth.smooth(rawdata);
 		setprop('/instrumentation/GMU44['~me.module~']/heading',heading);
+		setprop('/instrumentation/GMU44['~me.module~']/headingRaw',rawdata);
 
 		power = getprop('/instrumentation/GMU44[' ~ me.module ~ ']/operable');
 		serviceable = getprop('/instrumentation/GMU44[' ~ me.module ~ ']/serviceable');
