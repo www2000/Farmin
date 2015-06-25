@@ -3,20 +3,20 @@
 #
 
 var GRS77 {
-  new: func()
-  {
+    new: func()
+    {
 
-  },
-  update: func()
-  {
+    },
+    update: func()
+    {
 
-  },
-  watchdog: func()
-  {
+    },
+    watchdog: func()
+    {
 
-  },
-  run: func()
-  {
-    
-  },
+    },
+    run: func()
+    {
+
+    },
 };

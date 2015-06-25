@@ -451,17 +451,15 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
   <kr87>
     <file>Nasal/kr87.nas</file>
   </kr87>
-  <Farmin>
+  <Farmin-screen>
     <file>Aircraft/Instruments-3d/Farmin/G1000/Nasal/PFD/PFD.nas</file>
     <file>Aircraft/Instruments-3d/Farmin/G1000/Nasal/init.nas</file>
-    <!--<script><![CDATA[
-
-        ]]>
-   </script>-->
+  </Farmin-screen>
+  <Farmin>
+    <file>Aircraft/Instruments-3d/Farmin/nasal/smooth.nas</file>
+    <file>Aircraft/Instruments-3d/Farmin/nasal/tools.nas</file>
+    <file>Aircraft/Instruments-3d/Farmin/Systems/GMU44.nas</file>
   </Farmin>
-  <GRS77>
-    <file>Aircraft/Instruments-3d/Farmin/Systems/GRS77_GMU44.nas</file>
-  </GRS77>
 
   <tyresmoke>
    <file>Nasal/tyresmoke.nas</file>
