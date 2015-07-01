@@ -43,14 +43,13 @@ var GMU44 = {
 			settimer(func { me.update() },0.05);
 		}
 	},
-	watchdog: func()
+	offline: func()
 	{
-		print('watchdog');
 		var power = getprop('/systems/GMU44['~me.module~']/operable');
 		var serviceable = getprop('/systems/GMU44['~me.module~']/serviceable');
 		if(power == 1 and serviceable == 1)
 		{
-			settimer(func { me.update() }, 5*rand());
+			settimer(func { me.update() }, 2);
 		}
 		else
 		{
