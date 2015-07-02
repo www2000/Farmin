@@ -36,14 +36,14 @@ var GMU44 = {
 		if(power == 0 or serviceable == 0)
 		{
 			setprop('/systems/GMU44['~me.module~']/heading', 0);
-			settimer(func { me.watchdog() }, 0.05);
+			settimer(func { me.offLine() }, 0.05);
 		}
 		else
 		{
 			settimer(func { me.update() },0.05);
 		}
 	},
-	offline: func()
+	offLine: func()
 	{
 		var power = getprop('/systems/GMU44['~me.module~']/operable');
 		var serviceable = getprop('/systems/GMU44['~me.module~']/serviceable');
@@ -53,14 +53,14 @@ var GMU44 = {
 		}
 		else
 		{
-			settimer(func { me.watchdog()}, 1);
+			settimer(func { me.offLine()}, 1);
 		};
 
 	},
 	run: func()
 	{
 		print('run');
-		thread.newthread(func { me.watchdog() })
+		thread.newthread(func { me.offLine() })
 	},
 };
 #test delete in the further.
