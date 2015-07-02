@@ -5,7 +5,7 @@
 var GRS77 {
     new: func(module=0)
     {
-        var m = { parents: [GMU44] };
+        var m = { parents: [GRS77] };
 		m.module = module;
 		props.globals.initNode('/systems/GRS77['~m.module~']/heading',0,'DOUBLE');
 		props.globals.initNode('/systems/GRS77['~m.module~']/serviceable', 1, "BOOL");
