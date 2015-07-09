@@ -16,10 +16,12 @@
 
 
 var GDC47A {
-    new: func(module=0)
+    new: func(module=0, static=0,pitot=0)
     {
         var m = { parents: [GDC47A] };
         m.module = module;
+        m.static = static;
+        m.pitot = pitot;
         props.globals.initNode('/systems/GDC47A['~m.module~']/OATC',0,'DOUBLE');
         props.globals.initNode('/systems/GDC47A['~m.module~']/OATF',0,'DOUBLE');
         props.globals.initNode('/systems/GDC47A['~m.module~']/Static_Presser',0,'DOUBLE');
@@ -33,7 +35,7 @@ var GDC47A {
     },
     update: func()
     {
-
+        
     },
 
     offLine: func()
