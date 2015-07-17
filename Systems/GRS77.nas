@@ -20,18 +20,18 @@ var GRS77 {
     },
     update: func()
     {
-
+        #
     },
     watchdog: func()
     {
-
+        #
     },
     offLine: func()
     {
-
+        #
     },
     run: func()
     {
-
+        #
     },
 };

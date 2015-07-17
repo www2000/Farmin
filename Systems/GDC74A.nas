@@ -35,18 +35,19 @@ var GDC47A {
     },
     update: func()
     {
-        
+        #Density altitude calculation
+        P = getprop('/systems/static['~0~']/pressure-inhg');
+        Tc = getprop('/environment/temperature-degc');
+        Tf = getprop('/environment/temperature-degf');
+        DA = 145442.156268928*(1-math.pow((P/29.92126)/(273.15+Tc/288.15),0.234969246));
     },
 
     offLine: func()
     {
-
+        #
     },
     run: func()
     {
-        #Density altitude calculation
-        P
-        T = getprop('/environment/temperature-degc') + ;
-
+        #
     },
 };

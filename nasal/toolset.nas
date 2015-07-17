@@ -30,3 +30,7 @@ var F2K = func(F)
 {
 	return (F + 459.67) * (5/9);
 };
+var inHG2Pascal = func(inGH)
+{
+	return 3386.38866667 * inGH;
+}
