@@ -28,11 +28,14 @@ var GDC47A {
         props.globals.initNode('/systems/GDC47A['~m.module~']/Speed_Knot',0,'DOUBLE');
         props.globals.initNode('/systems/GDC47A['~m.module~']/Mach',0,'DOUBLE');
         props.globals.initNode('/systems/GDC47A['~m.module~']/Density_Altitude',0,'DOUBLE');
+        props.globals.initNode('/systems/GDC47A['~m.module~']/AltFeet', 0, "DOUBLE");
+        props.globals.initNode('/systems/GDC47A['~m.module~']/AltMeter', 0, "DOUBLE");
         props.globals.initNode('/systems/GDC47A['~m.module~']/serviceable', 1, "BOOL");
 		props.globals.initNode('/systems/GDC47A['~m.module~']/operable', 0, "BOOL");
 		m.smooth = smooth.new(30);
 		return m;
     },
+
     update: func()
     {
         #Density altitude calculation
@@ -40,6 +43,8 @@ var GDC47A {
         Tc = getprop('/environment/temperature-degc');
         Tf = getprop('/environment/temperature-degf');
         DA = 145442.156268928*(1-math.pow((P/29.92126)/(273.15+Tc/288.15),0.234969246));
+        AF = (1- math.pow((md/1013.25),0.190284)) * 145366.45;
+        AM = feet2Meter(AF);
     },
 
     offLine: func()

@@ -17,7 +17,7 @@ var GMU44 = {
 	},
 	update: func()
 	{
-		var sensordata = getprop("/orientation/heading-magnetic-deg");c
+		var sensordata = getprop("/orientation/heading-magnetic-deg");
 		var rawdata = sensordata + (0.2*noiseGenerator());
 		if (rawdata < 0.0 )
 		{

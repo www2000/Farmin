@@ -6,6 +6,7 @@ var noiseGenerator = func()
 {
 	return (rand() - rand() + rand() - rand()) /2;;
 };
+#Temperature
 var C2F = func(C)
 {
 	return (C*9.0)/5.0+32.0;
@@ -30,7 +31,23 @@ var F2K = func(F)
 {
 	return (F + 459.67) * (5/9);
 };
+#Length conver
+var feet2Meter = func(feet)
+{
+	return 0.3048 * feet;
+}
+
+var meter2Feet = func(meter)
+{
+	return 3.2808399 * meter;
+}
+
+#Pressure
 var inHG2Pascal = func(inGH)
 {
 	return 3386.38866667 * inGH;
-}
+};
+var inHG2mBar = func(inGH)
+{
+	return 33.8638866667 * inGH;
+};
