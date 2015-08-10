@@ -14,7 +14,6 @@
 # -55°C  27.5Vdc 235 mA, 13.8Vdc 480mA
 
 
-
 var GDC47A {
     new: func(module=0, static=0,pitot=0)
     {
@@ -42,9 +41,7 @@ var GDC47A {
         P = getprop('/systems/static['~0~']/pressure-inhg');
         Tc = getprop('/environment/temperature-degc');
         Tf = getprop('/environment/temperature-degf');
-        DA = 145442.156268928*(1-math.pow((P/29.92126)/(273.15+Tc/288.15),0.234969246));
-        AF = (1- math.pow((md/1013.25),0.190284)) * 145366.45;
-        AM = feet2Meter(AF);
+
     },
 
     offLine: func()
