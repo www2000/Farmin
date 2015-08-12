@@ -18,30 +18,26 @@ var GDC47A {
     new: func(module=0, static=0,pitot=0)
     {
         var m = { parents: [GDC47A] };
-        m.module = module;
-        m.static = static;
-        m.pitot = pitot;
-        props.globals.initNode('/systems/GDC47A['~m.module~']/OATC',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~m.module~']/OATF',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~m.module~']/Static_Presser',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~m.module~']/Speed_Knot',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~m.module~']/Mach',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~m.module~']/Density_Altitude',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~m.module~']/AltFeet', 0, "DOUBLE");
-        props.globals.initNode('/systems/GDC47A['~m.module~']/AltMeter', 0, "DOUBLE");
-        props.globals.initNode('/systems/GDC47A['~m.module~']/serviceable', 1, "BOOL");
-		props.globals.initNode('/systems/GDC47A['~m.module~']/operable', 0, "BOOL");
-		m.smooth = smooth.new(30);
+
+        var linkOut = props.globals.('/systems/GDC47A['~module~']/');
+
+        linkOut.initNode('OATC',0,'DOUBLE');
+
+        linkOut.initNode('serviceable', 1, "BOOL");
+        linkOut.initNode('operable', 0, "BOOL");
+        m.smooth = smooth.new(30);
+        var pantNode = {};
+        pantNode._total_pressure = 'non';
+        pantNode._static_pressure = 'total-pressure-inhg';
+        pantNode._density_node
+
+        m.pantNode = pantNode;
 		return m;
     },
 
     update: func()
     {
-        #Density altitude calculation
-        P = getprop('/systems/static['~0~']/pressure-inhg');
-        Tc = getprop('/environment/temperature-degc');
-        Tf = getprop('/environment/temperature-degf');
-
+        #
     },
 
     offLine: func()
