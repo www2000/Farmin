@@ -9,9 +9,9 @@ var GMU44 = {
 	{
 		var m = { parents: [GMU44] };
 		m.module = module;
-		.initNode('/systems/GMU44['~m.module~']/heading',0,'DOUBLE');
-		.initNode('/systems/GMU44['~m.module~']/serviceable', 1, "BOOL");
-		.initNode('/systems/GMU44['~m.module~']/operable', 0, "BOOL");
+		props.globals.initNode('/systems/GMU44['~m.module~']/heading',0,'DOUBLE');
+		props.globals.props.globals.initNode('/systems/GMU44['~m.module~']/serviceable', 1, "BOOL");
+		props.globals.initNode('/systems/GMU44['~m.module~']/operable', 0, "BOOL");
 		m.smooth = smooth.new(30);
 		return m;
 	},
@@ -35,11 +35,11 @@ var GMU44 = {
 		if(power == 0 or serviceable == 0)
 		{
 			setprop('/systems/GMU44['~me.module~']/heading', 0);
-			settimer(func { me.offLine() }, 0.05);
+			settimer(func { me.offLine() }, 0.02);
 		}
 		else
 		{
-			settimer(func { me.update() },0.05);
+			settimer(func { me.update() },0.02);
 		}
 	},
 	offLine: func()

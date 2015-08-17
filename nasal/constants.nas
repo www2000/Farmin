@@ -20,9 +20,13 @@ EQ_RAD_SQUARE_M			= 40680645877797.1344;
 # Physical Constants, SI
 
 # mean gravity on earth
-g0_m_p_s2				= 9.80665;
+g0_m_p_s2				= 9.80665; # m/s2
+
 # standard pressure at SL
-rho0_kg_p_m3 			= 1.225;
+p0_Pa					= 101325.0; # Pa
+
+# standard density at SL
+rho0_kg_p_m3 			= 1.225; # kg/m3
 
 # standard temperature at SL
 T0_K 					= 288.15;   # K (=15degC)

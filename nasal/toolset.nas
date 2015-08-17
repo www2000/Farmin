@@ -51,3 +51,32 @@ var inHG2mBar = func(inGH)
 {
 	return 33.8638866667 * inGH;
 };
+
+var fgGetLowPass = func(current, target, timeratio)
+{
+	if(timeratio < 0.0)
+	{
+		if (timeratio < -1.0)
+		{
+			current = target;
+		}
+		else
+		{
+
+		}
+	}
+	elsif (timeratio < 0.2)
+	{
+		current = current * (1.0 - timeratio) + target * timeratio;
+	}
+	elsif( timeratio > 5.0)
+	{
+		current = target;
+	}
+	else
+	{
+		keep = math.exp(-timeratio);
+		current = current * keep + target * (1.0 - keep);
+	}
+	return current;
+};
