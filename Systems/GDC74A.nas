@@ -93,12 +93,14 @@ var GDC47A {
 
     update_speed: func()
     {
+        # nasal port of airspeed_
+        current_time = node.globals.
         var p   = me.data.p;
         var pt  = me.data.pt;
         var qc = ( pt - p ) * INHG_TO_PA;
         var qc = math.max(qc , 0.0);
         var v_cal = math.sqrt( 7 * constants.p0_Pa/constants.rho0_kg_p_m3 * ( math.pow( 1 + qc/constants.p0_Pa  , 1/3.5 )  -1 ) );
-        var last_speed_kt = me.currendSpeed;
+        var last_speed_kt = me.airspeed_internal.currendSpeed;
         var current_speed_kt = v_cal * constants.MPS_TO_KT;
         var fgGetLowPass(last_speed_kt,current_speed_kt, dt * RESPONSIVENESS);
         me.
