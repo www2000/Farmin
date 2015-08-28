@@ -17,24 +17,36 @@ constants.INHG_TO_PA                = 3386.388640341;
 constants.rho0_kg_p_m3              = 1.225;
 constants.p0_Pa                     = 101325.0;
 constants.MPS_TO_KT                 = 1.9438444924406046432;
-RESPONSIVENESS                      = 50.0;
+constants.RESPONSIVENESS            = 50.0;
+constants.T0_K                      = 288.15;   # K (=15degC)
+constants.gamma                     = 1.4;
+constants.R_m2_p_s2_p_K             = 287.05;
+MPS_TO_KT                           = 1.9438444924406046432;
 
 
 var GDC47A {
     new: func(module=0, static=0,pitot=0)
     {
         var m = { parents: [GDC47A] };
+        var dataOut = {};
+        dataOut.root = props.globals.getNode('/systems/GDC47A['~module~']/');
+        dataOut.root.initNode('OATC',0,'DOUBLE');
+        dataOut.root.initNode('OATF',0,'DOUBLE');
+        dataOut.root.initNode('indicated-speed-kt',0,'DOUBLE');
+        dataOut.root.initNode('true-speed-kt',0,'DOUBLE');
+        dataOut.root.initNode('indicated-mach',0,'DOUBLE');
+        dataOut.root.initNode('serviceable', 1, "BOOL");
+        dataOut.root.initNode('operable', 0, "BOOL");
 
-        var DataOut = {};
-        DataOut.root = props.globals.('/systems/GDC47A['~module~']/');
-        DataOut.root.initNode('OATC',0,'DOUBLE');
-        DataOut.root.initNode('OATF',0,'DOUBLE');
-        DataOut.root.initNode('indicated-speed-kt',0,'DOUBLE');
-        DataOut.root.initNode('true-speed-kt',0,'DOUBLE');
-        DataOut..rootinitNode('indicated-mach',0,'DOUBLE');
+        var Airspeed_node = {}
+        Airspeed_node.IASkt = dataOut.root.getNode('indicated-speed-kt');
+        Airspeed_node.TASkt = dataOut.root.getNode('true-speed-kt');
+        Airspeed_node.IMN = dataOut.root.getNode('indicated-mach');
+        dataOut.Airspeed = Airspeed_node;
 
-        DataOut.root.initNode('serviceable', 1, "BOOL");
-        DataOut.root.initNode('operable', 0, "BOOL");
+
+
+        m.dataOut = dataOut;
 
         data = {};
         data.pt                       = 0;
@@ -43,15 +55,15 @@ var GDC47A {
         data.static_temperature_C     = 0;
         m.data = data;
 
-        m.DataOut = DataOut;
         var dataIn = [];
-        dataIn._total_pressure = props.globals.('/systems/pitot['~pitot~']/measured-total-pressure-inhg');
-        dataIn._static_pressure = props.globals.('/systems/static['~static~']/pressure-inhg');
-        dataIn._static_temperature_C = props.globals.('/environment/temperature-degc');
+        dataIn._total_pressure          = props.globals.getNode('/systems/pitot['~pitot~']/measured-total-pressure-inhg');
+        dataIn._static_pressure         = props.globals.getNode('/systems/static['~static~']/pressure-inhg');
+        dataIn._static_temperature_C    = props.globals.getNode('/environment/temperature-degc');
+        dataIn._density_node            = props.globals.getNode('/environment/density-slugft3');
         m.dataIn = dataIn;
 
         airspeed_internal = {};
-        airspeed_internal.lastupdate = props.globals.('/sim/time/').getValue();
+        airspeed_internal.lastupdate = props.globals.getNode('/sim/time/').getValue();
         airspeed_internal.currendSpeed = 0;
         m.airspeed_internal = airspeed_internal;
         return m;
@@ -84,7 +96,7 @@ var GDC47A {
             update_temp     = 1;
         }
 
-        if(update_static or update_pitot) update_speed();
+        if(update_static or update_pitot or static_temperature_C) update_speed();
         if(update_static) update_Alt();
         if(update_static or static_temperature_C) update_Vspeed();
 
@@ -102,8 +114,28 @@ var GDC47A {
         var v_cal = math.sqrt( 7 * constants.p0_Pa/constants.rho0_kg_p_m3 * ( math.pow( 1 + qc/constants.p0_Pa  , 1/3.5 )  -1 ) );
         var last_speed_kt = me.airspeed_internal.currendSpeed;
         var current_speed_kt = v_cal * constants.MPS_TO_KT;
-        var fgGetLowPass(last_speed_kt,current_speed_kt, dt * RESPONSIVENESS);
-        me.
+        var filtered_speed = fgGetLowPass(last_speed_kt,current_speed_kt, dt * RESPONSIVENESS);
+
+        me.dataOut.dataOut.Airspeed.IASkt.setDoubleValue(filtered_speed);
+        me.update_Mach();
+    },
+
+    update_Mach: func()
+    {
+        var oatK = me.data.static_temperature_C + constants.T0_K - 15;
+        oatK = math.max(oatK, 0.001);
+        var c = math.sqrt(constants.gamma * constants.R_m2_p_s2_p_K * oatK);
+        var p   = me.data.p * INHG_TO_PA;
+        var pt  = me.data.pt * INHG_TO_PA;
+        p = math.max(p, 0.001);
+        var rho = me.dataIn._density_node.getValue() * SLUGFT3_TO_KGPM3;
+        rho = math.max(rho, 0.001);
+
+        pt = math.math(pt, p);
+        var V_true = math.sqrt( 7 * p/rho * (math.pow( 1 + (pt-p)/p , 0.2857142857142857 ) -1 ));
+        var mach = V_true / c;
+        me.dataOut.dataOut.Airspeed.TASkt.setDoubleValue(mach);
+        me.dataOut.dataOut.Airspeed.IMN.setDoubleValue(V_true * MPS_TO_KT);
     },
 
     update_Alt: func()

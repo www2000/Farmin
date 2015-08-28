@@ -8,13 +8,14 @@ var GRS77 {
     {
         var m = { parents: [GRS77] };
 		m.module = module;
-		.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
-		.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
-        .initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
-        .initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
-        .initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
-        .initNode('/systems/GRS77['~m.module~']/serviceable', 1, "BOOL");
-		.initNode('/systems/GRS77['~m.module~']/operable', 0, "BOOL");
+
+		props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
+		props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
+        props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
+        props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
+        props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
+        props.globals.initNode('/systems/GRS77['~m.module~']/serviceable', 1, "BOOL");
+		props.globals.initNode('/systems/GRS77['~m.module~']/operable', 0, "BOOL");
 		m.smooth = smooth.new(30);
 		return m;
     },
