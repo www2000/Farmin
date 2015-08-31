@@ -68,13 +68,14 @@ var GDC47A {
         m.dataOut = dataOut;
 
         data = {};
-        data.pt                       = 0;
-        data.p                        = 0;
-        data.qc                       = 0;
-        data.static_temperature_C     = 0;
-        data.PressAlt                 = 0;
-        data.kollsmanInhg             = 0;
-        data.dt                       = 0;
+        data.pt                         = 0;
+        data.p                          = 0;
+        data.qc                         = 0;
+        data.static_temperature_C       = 0;
+        data.PressAlt                   = 0;
+        data.kollsmanInhg               = 0;
+        data.kollsman_alt               = 0;
+        data.dt                         = 0;
         m.data = data;
 
         var dataIn = [];
@@ -97,23 +98,23 @@ var GDC47A {
     update_loop: func()
     {
         #getdata
-        me.dt   = me.dataIn.dt.getValue()
-        pt      = me.dataIn._total_pressure.getValue();
-        p       = me.dataIn._static_pressure.getValue();
-        static_temperature_C = me.dataIn._static_temperature_C.getValue();
+        me.data.dt              = me.dataIn.dt.getValue()
+        pt                      = me.dataIn._total_pressure.getValue();
+        p                       = me.dataIn._static_pressure.getValue();
+        static_temperature_C    = me.dataIn._static_temperature_C.getValue();
 
         var update_static   = 0;
         var update_pitot    = 0;
         var update_temp     = 0;
         d = me.data;
-        if(pt == d.pt)
+        if(pt != me.data.pt)
         {
-            m.data.pt == pt;
+            me.data.pt = pt;
             update_pitot    = 1;
         }
-        if(p == d.p)
+        if(p != me.data.p)
         {
-            me.data.p == p;
+            me.data.p = p;
             update_static   = 1;
         }
         if(static_temperature_C == d.static_temperature_C)
@@ -132,7 +133,7 @@ var GDC47A {
     update_speed: func()
     {
         # nasal port of airspeed_
-        me.dt   = me.data.dt
+        var dt   = me.data.dt
         var p   = me.data.p;
         var pt  = me.data.pt;
         var qc = ( pt - p ) * constants.INHG_TO_PA;
@@ -164,6 +165,10 @@ var GDC47A {
         me.dataOut.dataOut.Airspeed.IMN.setDoubleValue(V_true * MPS_TO_KT);
     },
 
+    update_Kollsman: func()
+    {
+
+    }
     update_Alt: func()
     {
         var tau = 0.01;
@@ -174,7 +179,7 @@ var GDC47A {
         #dataOut.Altimeter.SAlt.setDoubleValue(10* math.round(raw_pa/10));
         press_alt = raw_pa;
         me.dataOut.pressure-alt-ft.setDoubleValue(press_alt);
-        me.dataOut.indAlt.setDoubleValue(press_alt - me.kollsman)
+        me.dataOut.indAlt.setDoubleValue(press_alt - me.data.kollsman_alt);
     },
 
 
