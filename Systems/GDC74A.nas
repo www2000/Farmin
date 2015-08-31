@@ -73,7 +73,8 @@ var GDC47A {
         data.qc                       = 0;
         data.static_temperature_C     = 0;
         data.PressAlt                 = 0;
-        data.kollsmanInhg             =
+        data.kollsmanInhg             = 0;
+        data.dt                       = 0;
         m.data = data;
 
         var dataIn = [];
@@ -83,10 +84,10 @@ var GDC47A {
         dataIn._density_node            = props.globals.getNode('/environment/density-slugft3');
         dataIn.setHpa                   = dataOut.root.getNode('setting-hpa');
         dataIn.setInhg                  = dataOut.root.getNode('setting-inhg');
+        dataIn.dt                       = props.globals.getNode('/sim/time/delta-sec').getValue();
         m.dataIn = dataIn;
 
         airspeed_internal = {};
-        airspeed_internal.lastupdate = props.globals.getNode('/sim/time/delta-sec').getValue();
         airspeed_internal.currendSpeed = 0;
         m.airspeed_internal = airspeed_internal;
 
@@ -96,8 +97,9 @@ var GDC47A {
     update_loop: func()
     {
         #getdata
-        pt = me.dataIn._total_pressure.getValue();
-        p = me.dataIn._static_pressure.getValue();
+        me.dt   = me.dataIn.dt.getValue()
+        pt      = me.dataIn._total_pressure.getValue();
+        p       = me.dataIn._static_pressure.getValue();
         static_temperature_C = me.dataIn._static_temperature_C.getValue();
 
         var update_static   = 0;
@@ -130,7 +132,7 @@ var GDC47A {
     update_speed: func()
     {
         # nasal port of airspeed_
-        me.dt = node.globals.getValue()
+        me.dt   = me.data.dt
         var p   = me.data.p;
         var pt  = me.data.pt;
         var qc = ( pt - p ) * constants.INHG_TO_PA;
@@ -165,7 +167,7 @@ var GDC47A {
     update_Alt: func()
     {
         var tau = 0.01;
-        var trat = tau > 0 ? dt/tau : 100;
+        var trat = tau > 0 ? me.dt/tau : 100;
         p = me.p;
         raw_pa = (1-math.pow(p/29.9212553471122, 0.190284)) * 145366.45;
         dataOut.Altimeter.CAlt.setDoubleValue(100* math.round(raw_pa/100));
