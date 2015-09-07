@@ -74,6 +74,7 @@ var GDC47A {
         data.static_temperature_C       = 0;
         data.PressAlt                   = 0;
         data.kollsmanInhg               = 0;
+        data.kollsmanInhg               = 0;
         data.kollsman_alt               = 0;
         data.dt                         = 0;
         m.data = data;
@@ -85,7 +86,7 @@ var GDC47A {
         dataIn._density_node            = props.globals.getNode('/environment/density-slugft3');
         dataIn.setHpa                   = dataOut.root.getNode('setting-hpa');
         dataIn.setInhg                  = dataOut.root.getNode('setting-inhg');
-        dataIn.dt                       = props.globals.getNode('/sim/time/delta-sec').getValue();
+        dataIn.dt                       = props.globals.getNode('/sim/time/delta-sec');
         m.dataIn = dataIn;
 
         airspeed_internal = {};
@@ -102,10 +103,12 @@ var GDC47A {
         pt                      = me.dataIn._total_pressure.getValue();
         p                       = me.dataIn._static_pressure.getValue();
         static_temperature_C    = me.dataIn._static_temperature_C.getValue();
-
+        setHpa                  = dataIn.setHpa;
+        setInhg                 = dataIn.setInhg;
         var update_static   = 0;
         var update_pitot    = 0;
         var update_temp     = 0;
+        var update_kollsman = 0;
         d = me.data;
         if(pt != me.data.pt)
         {
@@ -122,10 +125,10 @@ var GDC47A {
             me.data.static_temperature_C = static_temperature_C;
             update_temp     = 1;
         }
-
-        if(update_static or update_pitot or static_temperature_C) update_speed();
-        if(update_static) update_Alt();
-        if(update_static or static_temperature_C) update_Vspeed();
+        if(update_kollsman) me.update_Kollsman();
+        if(update_static or update_pitot or static_temperature_C) me.update_speed();
+        if(update_static or update_kollsman) me.update_Alt();
+        if(update_static or static_temperature_C) me.update_Vspeed();
 
         settimer(func { me.update_loop(); }, 0.02);
     },
@@ -168,11 +171,13 @@ var GDC47A {
     update_Kollsman: func()
     {
 
+        me.data.kollsman_alt = (1-math.pow(p/29.9212553471122, 0.190284)) * 145366.45;
+
     }
     update_Alt: func()
     {
-        var tau = 0.01;
-        var trat = tau > 0 ? me.dt/tau : 100;
+        #var tau = 0.01;
+        #var trat = tau > 0 ? me.dt/tau : 100;
         p = me.p;
         raw_pa = (1-math.pow(p/29.9212553471122, 0.190284)) * 145366.45;
         dataOut.Altimeter.CAlt.setDoubleValue(100* math.round(raw_pa/100));
