@@ -21,7 +21,9 @@ constants.RESPONSIVENESS            = 50.0;
 constants.T0_K                      = 288.15;   # K (=15degC)
 constants.gamma                     = 1.4;
 constants.R_m2_p_s2_p_K             = 287.05;
-MPS_TO_KT                           = 1.9438444924406046432;
+constants.MPS_TO_KT                 = 1.9438444924406046432;
+constants.PA_TO_INHG                = 0.0002952998330101010;
+constants.INHG_TO_PA                = 3386.388640341;
 
 
 var GDC47A {
@@ -103,12 +105,12 @@ var GDC47A {
         pt                      = me.dataIn._total_pressure.getValue();
         p                       = me.dataIn._static_pressure.getValue();
         static_temperature_C    = me.dataIn._static_temperature_C.getValue();
-        setHpa                  = dataIn.setHpa;
-        setInhg                 = dataIn.setInhg;
-        var update_static   = 0;
-        var update_pitot    = 0;
-        var update_temp     = 0;
-        var update_kollsman = 0;
+        setHpa                  = me.dataIn.setHpa.getValue();
+        setInhg                 = me.dataIn.setInhg.getValue();
+        var update_static       = 0;
+        var update_pitot        = 0;
+        var update_temp         = 0;
+        var update_kollsman     = 0;
         d = me.data;
         if(pt != me.data.pt)
         {
@@ -124,6 +126,10 @@ var GDC47A {
         {
             me.data.static_temperature_C = static_temperature_C;
             update_temp     = 1;
+        }
+        if(setHpa != me.data.setHpa or me.data.setInhg != setInhg)
+        {
+            update_kollsman = 1;
         }
         if(update_kollsman) me.update_Kollsman();
         if(update_static or update_pitot or static_temperature_C) me.update_speed();
@@ -170,10 +176,24 @@ var GDC47A {
 
     update_Kollsman: func()
     {
+        setHpa                  = me.dataIn.setHpa.getValue();
+        setInhg                 = me.dataIn.setInhg.getValue();
+        if(setHpa != me.data.setHpa = )
+        {
+            me.data.setHpa = setHpa
+            p =
+            me.data.setInhg = p;
 
+        }
+        elsif(setInhg != me.data.setInhg)
+        {
+            p = setInhg;
+            me.data.setInhg = p;
+            me.data.setHpa = math.round((p * constants.INHG_TO_PA)/10)/10;
+        }
         me.data.kollsman_alt = (1-math.pow(p/29.9212553471122, 0.190284)) * 145366.45;
 
-    }
+    },
     update_Alt: func()
     {
         #var tau = 0.01;
