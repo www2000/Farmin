@@ -180,16 +180,15 @@ var GDC47A {
         setInhg                 = me.dataIn.setInhg.getValue();
         if(setHpa != me.data.setHpa = )
         {
-            me.data.setHpa = setHpa
-            p =
+            setHpa = me.data.setHpa
+            p = math.round((setHpa * constants.PA_TO_INHG)*10000)/100;
             me.data.setInhg = p;
-
         }
         elsif(setInhg != me.data.setInhg)
         {
             p = setInhg;
             me.data.setInhg = p;
-            me.data.setHpa = math.round((p * constants.INHG_TO_PA)/10)/10;
+            me.data.setHpa = math.round((p * constants.INHG_TO_PA)*10)/10;
         }
         me.data.kollsman_alt = (1-math.pow(p/29.9212553471122, 0.190284)) * 145366.45;
 
