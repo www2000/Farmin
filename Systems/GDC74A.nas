@@ -113,9 +113,9 @@ var GDC47A = {
     update_loop: func()
     {
         #getdata
-        updatetime                  = systime();
-        me.data.lastUpdate          = 
-        me.data.dt                  = me.data.dt;
+        lastUpdat                   = systime();
+        me.data.dt                  = lastupdate - me.data.lastUpdate;
+        me.data.lastUpdate          = lastupdate;
         var pt                      = me.dataIn._total_pressure.getValue();
         var p                       = me.dataIn._static_pressure.getValue();
         var static_temperature_C    = me.dataIn._static_temperature_C.getValue();
