@@ -577,6 +577,9 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <file>Aircraft/Instruments-3d/Farmin/nasal/toolset.nas</file>
             <file>Aircraft/Instruments-3d/Farmin/Systems/GMU44.nas</file>
         </Farmin>
+        <GMU>
+            <file>Aircraft/Instruments-3d/Farmin/Systems/GDC74A.nas</file>
+        <GMU/>
         <tyresmoke>
             <file>Nasal/tyresmoke.nas</file>
         </tyresmoke>
