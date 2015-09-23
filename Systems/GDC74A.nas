@@ -91,6 +91,7 @@ var GDC47A = {
         data.kollsman_alt               = 0;
         data.dt                         = 0;
         data.current_alt                = 0;
+        data.LastVSfpm                  = 0;
         data.lastUpdate                 = systime();
         m.data = data;
 
@@ -113,9 +114,9 @@ var GDC47A = {
     update_loop: func()
     {
         #getdata
-        lastUpdat                   = systime();
-        me.data.dt                  = lastupdate - me.data.lastUpdate;
-        me.data.lastUpdate          = lastupdate;
+        var lastUpdate              = systime();
+        me.data.dt                  = lastUpdate - me.data.lastUpdate;
+        me.data.lastUpdate          = lastUpdate;
         var pt                      = me.dataIn._total_pressure.getValue();
         var p                       = me.dataIn._static_pressure.getValue();
         var static_temperature_C    = me.dataIn._static_temperature_C.getValue();
@@ -213,18 +214,17 @@ var GDC47A = {
         #me.dataOut.Altimeter.SAlt.setDoubleValue(10* math.round(raw_pa/10));
 
         dt = me.data.dt;
-        print(dt);
-        VSfpm = (raw_pa - me.data.current_alt) * (1/dt) * 60;
+        #print(dt);
+        VSfpm = fgGetLowPass((raw_pa - me.data.current_alt) * (1/dt) * 60, me.data.LastVSfpm, dt*100);
         me.dataOut.Vspeed.fpm.setDoubleValue(VSfpm);
         me.dataOut.Vspeed.kts.setDoubleValue(VSfpm);
         me.dataOut.Vspeed.mps.setDoubleValue(VSfpm);
-
+        me.data.LastVSfpm = VSfpm;
         press_alt = raw_pa;
         me.dataOut.Altimeter.PressAlt.setDoubleValue(press_alt);
         me.dataOut.Altimeter.indAlt.setDoubleValue(press_alt - me.data.kollsman_alt);
         me.data.current_alt = raw_pa;
     },
-
 
     offLine: func()
     {
@@ -233,7 +233,7 @@ var GDC47A = {
     run: func()
     {
         print('run');
-        settimer(func { me.update_loop() },0.02);
+        settimer(func { me.update_loop() },0.01);
     },
 };
 
