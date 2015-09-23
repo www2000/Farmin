@@ -68,7 +68,7 @@ var GDC47A = {
         var Altimeter_node = {};
         Altimeter_node.indAlt = dataOut.root.getNode('indicated-altitude-ft');
         Altimeter_node.CAlt = dataOut.root.getNode('mode-c-alt-ft');
-        #Altimeter_node.SAlt = dataOut.root.getNode('mode-s-alt-ft'); #disable for GDC74A
+        Altimeter_node.SAlt = dataOut.root.getNode('mode-s-alt-ft'); #disable for GDC74A
         Altimeter_node.PressAlt = dataOut.root.getNode('pressure-alt-ft');
         dataOut.Altimeter = Altimeter_node;
 
@@ -210,7 +210,7 @@ var GDC47A = {
         var p = me.data.p;
         var raw_pa = (1-math.pow(p/29.9212553471122, 0.190284)) * 145366.45;
         me.dataOut.Altimeter.CAlt.setDoubleValue(100* math.round(raw_pa/100));
-        #me.dataOut.Altimeter.SAlt.setDoubleValue(10* math.round(raw_pa/10));
+        me.dataOut.Altimeter.SAlt.setDoubleValue(10* math.round(raw_pa/10));
 
         dt = me.data.dt;
         print(dt);
@@ -224,7 +224,6 @@ var GDC47A = {
         me.dataOut.Altimeter.indAlt.setDoubleValue(press_alt - me.data.kollsman_alt);
         me.data.current_alt = raw_pa;
     },
-
 
     offLine: func()
     {
