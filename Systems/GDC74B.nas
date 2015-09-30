@@ -26,10 +26,10 @@ constants.INHG_TO_PA                = 3386.388640341;
 constants.SLUGFT3_TO_KGPM3          = 515.379;
 
 
-var GDC47A = {
+var GDC47B = {
     new: func(module=0, static=0,pitot=0)
     {
-        var m = { parents: [GDC47A] };
+        var m = { parents: [GDC47B] };
         var dataOut = {};
 
         # Outside Temperature
@@ -68,7 +68,7 @@ var GDC47A = {
         var Altimeter_node = {};
         Altimeter_node.indAlt = dataOut.root.getNode('indicated-altitude-ft');
         Altimeter_node.CAlt = dataOut.root.getNode('mode-c-alt-ft');
-        Altimeter_node.SAlt = dataOut.root.getNode('mode-s-alt-ft'); #disable for GDC74A
+        Altimeter_node.SAlt = dataOut.root.getNode('mode-s-alt-ft'); #Enable for GDC74B
         Altimeter_node.PressAlt = dataOut.root.getNode('pressure-alt-ft');
         dataOut.Altimeter = Altimeter_node;
 
@@ -91,6 +91,7 @@ var GDC47A = {
         data.kollsman_alt               = 0;
         data.dt                         = 0;
         data.current_alt                = 0;
+        data.LastVSfpm                  = 0;
         data.lastUpdate                 = systime();
         m.data = data;
 
@@ -107,20 +108,28 @@ var GDC47A = {
         airspeed_internal.currendSpeed = 0;
         m.airspeed_internal = airspeed_internal;
 
+        service = {};
+        service.serviceable     = dataOut.root.getNode('serviceable');
+        service.operable        = dataOut.root.getNode('operable');
+        m.service = service;
+
+
         return m;
     },
 
     update_loop: func()
     {
         #getdata
-        lastUpdat                   = systime();
-        me.data.dt                  = lastupdate - me.data.lastUpdate;
-        me.data.lastUpdate          = lastupdate;
+        var lastUpdate              = systime();
+        me.data.dt                  = lastUpdate - me.data.lastUpdate;
+        me.data.lastUpdate          = lastUpdate;
         var pt                      = me.dataIn._total_pressure.getValue();
         var p                       = me.dataIn._static_pressure.getValue();
         var static_temperature_C    = me.dataIn._static_temperature_C.getValue();
         var setHpa                  = me.dataIn.setHpa.getValue();
         var setInhg                 = me.dataIn.setInhg.getValue();
+        var power                   = me.service.operable.getValue();
+		var serviceable             = me.service.serviceable.getValue();
         var update_static           = 0;
         var update_pitot            = 0;
         var update_temp             = 0;
@@ -140,10 +149,17 @@ var GDC47A = {
         {
             update_kollsman = 1;
         }
-        if(update_kollsman) me.update_Kollsman();
-        if(update_static or update_pitot or static_temperature_C) me.update_speed();
-        if(update_static or update_kollsman) me.update_Alt();
-        settimer(func { me.update_loop(); }, 0);
+        if(power == 0 or serviceable == 0)
+		{
+			settimer(func { me.offLine() }, 0);
+		}
+		else
+		{
+            if(update_kollsman) me.update_Kollsman();
+            if(update_static or update_pitot or static_temperature_C) me.update_speed();
+            if(update_static or update_kollsman) me.update_Alt();
+            settimer(func { me.update_loop(); }, 0);
+		}
     },
 
     update_speed: func()
@@ -213,12 +229,12 @@ var GDC47A = {
         me.dataOut.Altimeter.SAlt.setDoubleValue(10* math.round(raw_pa/10));
 
         dt = me.data.dt;
-        print(dt);
-        VSfpm = (raw_pa - me.data.current_alt) * (1/dt) * 60;
+        #print(dt);
+        VSfpm = fgGetLowPass((raw_pa - me.data.current_alt) * (1/dt) * 60, me.data.LastVSfpm, dt*100);
         me.dataOut.Vspeed.fpm.setDoubleValue(VSfpm);
         me.dataOut.Vspeed.kts.setDoubleValue(VSfpm);
         me.dataOut.Vspeed.mps.setDoubleValue(VSfpm);
-
+        me.data.LastVSfpm = VSfpm;
         press_alt = raw_pa;
         me.dataOut.Altimeter.PressAlt.setDoubleValue(press_alt);
         me.dataOut.Altimeter.indAlt.setDoubleValue(press_alt - me.data.kollsman_alt);
@@ -227,12 +243,20 @@ var GDC47A = {
 
     offLine: func()
     {
-        #
+        var power = me.service.operable.getValue();
+		var serviceable = me.service.serviceable.getValue();
+		if(power == 1 and serviceable == 1)
+		{
+			settimer(func { me.update_loop() }, 2);
+		}
+		else
+		{
+			settimer(func { me.offLine()}, 1);
+		};
     },
     run: func()
     {
-        print('run');
-        settimer(func { me.update_loop() },0.02);
+        settimer(func { me.offLine() },0.01);
     },
 };
 
