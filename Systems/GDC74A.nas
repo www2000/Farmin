@@ -108,6 +108,12 @@ var GDC47A = {
         airspeed_internal.currendSpeed = 0;
         m.airspeed_internal = airspeed_internal;
 
+        service = {};
+        service.serviceable     = dataOut.root.getNode('serviceable');
+        service.operable        = dataOut.root.getNode('operable');
+        m.service = service;
+
+
         return m;
     },
 
@@ -122,6 +128,8 @@ var GDC47A = {
         var static_temperature_C    = me.dataIn._static_temperature_C.getValue();
         var setHpa                  = me.dataIn.setHpa.getValue();
         var setInhg                 = me.dataIn.setInhg.getValue();
+        var power                   = me.service.operable.getValue();
+		var serviceable             = me.service.serviceable.getValue();
         var update_static           = 0;
         var update_pitot            = 0;
         var update_temp             = 0;
@@ -141,10 +149,17 @@ var GDC47A = {
         {
             update_kollsman = 1;
         }
-        if(update_kollsman) me.update_Kollsman();
-        if(update_static or update_pitot or static_temperature_C) me.update_speed();
-        if(update_static or update_kollsman) me.update_Alt();
-        settimer(func { me.update_loop(); }, 0.02);
+        if(power == 0 or serviceable == 0)
+		{
+			settimer(func { me.offLine() }, 0);
+		}
+		else
+		{
+            if(update_kollsman) me.update_Kollsman();
+            if(update_static or update_pitot or static_temperature_C) me.update_speed();
+            if(update_static or update_kollsman) me.update_Alt();
+            settimer(func { me.update_loop(); }, 0);
+		}
     },
 
     update_speed: func()
@@ -228,12 +243,20 @@ var GDC47A = {
 
     offLine: func()
     {
-        #
+        var power = me.service.operable.getValue();
+		var serviceable = me.service.serviceable.getValue();
+		if(power == 1 and serviceable == 1)
+		{
+			settimer(func { me.update_loop() }, 2);
+		}
+		else
+		{
+			settimer(func { me.offLine()}, 1);
+		};
     },
     run: func()
     {
-        print('run');
-        settimer(func { me.update_loop() },0.01);
+        settimer(func { me.offLine() },0.01);
     },
 };
 

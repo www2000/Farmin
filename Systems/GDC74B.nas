@@ -143,7 +143,7 @@ var GDC47A = {
         if(update_kollsman) me.update_Kollsman();
         if(update_static or update_pitot or static_temperature_C) me.update_speed();
         if(update_static or update_kollsman) me.update_Alt();
-        settimer(func { me.update_loop(); }, 0.02);
+        settimer(func { me.update_loop(); }, 0);
     },
 
     update_speed: func()
