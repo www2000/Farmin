@@ -58,7 +58,6 @@ var GMU44 = {
 	},
 	run: func()
 	{
-		print('run');
 		thread.newthread(func { me.offLine() })
 	},
 };

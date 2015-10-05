@@ -9,11 +9,10 @@ var GRS77 {
         var m = { parents: [GRS77] };
 		m.module = module;
 
-		props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
-		props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
-        props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
-        props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
-        props.globals.initNode('/systems/GRS77['~m.module~']/OAT',0,'DOUBLE');
+		props.globals.initNode('/systems/GRS77['~m.module~']/Attitude',0,'DOUBLE');
+		props.globals.initNode('/systems/GRS77['~m.module~']/ROT',0,'DOUBLE');
+        props.globals.initNode('/systems/GRS77['~m.module~']/SlipSkid',0,'DOUBLE');
+        props.globals.initNode('/systems/GRS77['~m.module~']/Pitch',0,'DOUBLE');
         props.globals.initNode('/systems/GRS77['~m.module~']/serviceable', 1, "BOOL");
 		props.globals.initNode('/systems/GRS77['~m.module~']/operable', 0, "BOOL");
 		m.smooth = smooth.new(30);
