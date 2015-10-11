@@ -26,61 +26,57 @@ constants.INHG_TO_PA                = 3386.388640341;
 constants.SLUGFT3_TO_KGPM3          = 515.379;
 
 
-var GDC47B = {
+var GDC47A = {
     new: func(module=0, static=0,pitot=0)
     {
-        var m = { parents: [GDC47B] };
-        var dataOut = {};
+        var m = { parents: [GDC47A] };
+        var data                = {};
+        var dataOut             = {};
+        var Airspeed_node       = {};
+        var Altimeter_node      = {};
+        var Vspeed_node         = {};
+        var dataIn              = {};
+        var airspeed_internal   = {};
+        var service             = {};
 
-        # Outside Temperature
-        props.globals.initNode('/systems/GDC47A['~module~']/OATC',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~module~']/OATF',0,'DOUBLE');
-        # Airspeed
-        props.globals.initNode('/systems/GDC47A['~module~']/indicated-speed-kt',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~module~']/true-speed-kt',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~module~']/indicated-mach',0,'DOUBLE');
-
-        # Altimeter
-        props.globals.initNode('/systems/GDC47A['~module~']/indicated-altitude-ft',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~module~']/mode-c-alt-ft',0,'DOUBLE');
-        #props.globals.initNode('/systems/GDC47A['~module~']/mode-s-alt-ft',0,'DOUBLE'); #disable for GDC74A
-        props.globals.initNode('/systems/GDC47A['~module~']/pressure-alt-ft',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~module~']/setting-hpa',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~module~']/setting-inhg',0,'DOUBLE');
-
-        # Vertical Speed
-        props.globals.initNode('/systems/GDC47A['~module~']/indicated-speed-fpm',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~module~']/indicated-speed-kts',0,'DOUBLE');
-        props.globals.initNode('/systems/GDC47A['~module~']/indicated-speed-mps',0,'DOUBLE');
+        root = props.globals.initNode('/systems/GDC47A['~module~']/');
 
         # system
-        props.globals.initNode('/systems/GDC47A['~module~']/serviceable', 1, "BOOL");
-        props.globals.initNode('/systems/GDC47A['~module~']/operable', 0, "BOOL");
+        service.serviceable     = root.initNode('serviceable', 1, "BOOL");
+        service.operable        = root.initNode('operable', 0, "BOOL");
 
-        dataOut.root = props.globals.getNode('/systems/GDC47A['~module~']');
+        # Outside Temperature
+        dataOut.OATC            = root.initNode('OATC',0,'DOUBLE');
+        dataOut.OATF            = root.initNode('OATF',0,'DOUBLE');
 
-        var Airspeed_node = {};
-        Airspeed_node.IASkt = dataOut.root.getNode('indicated-speed-kt');
-        Airspeed_node.TASkt = dataOut.root.getNode('true-speed-kt');
-        Airspeed_node.IMN = dataOut.root.getNode('indicated-mach');
-        dataOut.Airspeed = Airspeed_node;
+        # Airspeed
+        Airspeed_node.IASkt     = root.initNode('indicated-speed-kt',0,'DOUBLE');
+        Airspeed_node.TASkt     = root.initNode('true-speed-kt',0,'DOUBLE');
+        Airspeed_node.IMN       = root.initNode('indicated-mach',0,'DOUBLE');
 
-        var Altimeter_node = {};
-        Altimeter_node.indAlt = dataOut.root.getNode('indicated-altitude-ft');
-        Altimeter_node.CAlt = dataOut.root.getNode('mode-c-alt-ft');
-        Altimeter_node.SAlt = dataOut.root.getNode('mode-s-alt-ft'); #Enable for GDC74B
-        Altimeter_node.PressAlt = dataOut.root.getNode('pressure-alt-ft');
-        dataOut.Altimeter = Altimeter_node;
+        # Altimeter
+        Altimeter_node.indAlt   = root.initNode('indicated-altitude-ft',0,'DOUBLE');
+        Altimeter_node.CAlt     = root.initNode('mode-c-alt-ft',0,'DOUBLE');
+        Altimeter_node.SAlt     = root.initNode('mode-s-alt-ft',0,'DOUBLE'); #disable for GDC74A
+        Altimeter_node.PressAlt = root.initNode('pressure-alt-ft',0,'DOUBLE');
+        dataIn.setHpa           = root.initNode('setting-hpa',1013.25,'DOUBLE');
+        dataIn.setInhg          = root.initNode('setting-inhg',0,'DOUBLE');
 
-        var Vspeed_node = {};
-        Vspeed_node.fpm = dataOut.root.getNode('indicated-speed-fpm');
-        Vspeed_node.kts = dataOut.root.getNode('indicated-speed-kts');
-        Vspeed_node.mps = dataOut.root.getNode('indicated-speed-mps');
-        dataOut.Vspeed = Vspeed_node;
+        # Vertical Speed
+        Vspeed_node.fpm         = root.initNode('indicated-speed-fpm',0,'DOUBLE');
+        Vspeed_node.kts         = root.initNode('indicated-speed-kts',0,'DOUBLE');
+        Vspeed_node.mps         = root.initNode('indicated-speed-mps',0,'DOUBLE');
 
-        m.dataOut = dataOut;
+        # system
+        root.initNode('serviceable', 1, "BOOL");
+        root.initNode('operable', 0, "BOOL");
 
-        data = {};
+        dataIn._total_pressure          = props.globals.getNode('/systems/pitot['~pitot~']/measured-total-pressure-inhg');
+        dataIn._static_pressure         = props.globals.getNode('/systems/static['~static~']/pressure-inhg');
+        dataIn._static_temperature_C    = props.globals.getNode('/environment/temperature-degc');
+        dataIn._density_node            = props.globals.getNode('/environment/density-slugft3');
+
+        # internel variabels
         data.pt                         = 0;
         data.p                          = 0;
         data.qc                         = 0;
@@ -93,27 +89,17 @@ var GDC47B = {
         data.current_alt                = 0;
         data.LastVSfpm                  = 0;
         data.lastUpdate                 = systime();
-        m.data = data;
+        airspeed_internal.currendSpeed  = 0;
 
-        var dataIn = {};
-        dataIn._total_pressure          = props.globals.getNode('/systems/pitot['~pitot~']/measured-total-pressure-inhg');
-        dataIn._static_pressure         = props.globals.getNode('/systems/static['~static~']/pressure-inhg');
-        dataIn._static_temperature_C    = props.globals.getNode('/environment/temperature-degc');
-        dataIn._density_node            = props.globals.getNode('/environment/density-slugft3');
-        dataIn.setHpa                   = dataOut.root.getNode('setting-hpa');
-        dataIn.setInhg                  = dataOut.root.getNode('setting-inhg');
+        dataOut.Airspeed = Airspeed_node;
+        dataOut.Altimeter = Altimeter_node;
+        dataOut.Vspeed = Vspeed_node;
+        m.dataOut = dataOut;
         m.dataIn = dataIn;
-
-        airspeed_internal = {};
-        airspeed_internal.currendSpeed = 0;
+        m.data = data;
+        dataOut.Airspeed = Airspeed_node;
         m.airspeed_internal = airspeed_internal;
-
-        service = {};
-        service.serviceable     = dataOut.root.getNode('serviceable');
-        service.operable        = dataOut.root.getNode('operable');
         m.service = service;
-
-
         return m;
     },
 
@@ -145,9 +131,14 @@ var GDC47B = {
             me.data.p = p;
             update_static   = 1;
         }
-            if((setHpa != me.data.kollsmanHpa) or (setInhg != me.data.kollsmanInhg))
+        if((setHpa != me.data.kollsmanHpa) or (setInhg != me.data.kollsmanInhg))
         {
             update_kollsman = 1;
+        }
+        if(static_temperature_C != me.data.static_temperature_C)
+        {
+            me.data.static_temperature_C = static_temperature_C;
+            update_temp = 1;
         }
         if(power == 0 or serviceable == 0)
 		{
@@ -156,11 +147,17 @@ var GDC47B = {
 		else
 		{
             if(update_kollsman) me.update_Kollsman();
-            if(update_static or update_pitot or static_temperature_C) me.update_speed();
+            if(update_static or update_pitot or update_temperature) me.update_speed();
             if(update_static or update_kollsman) me.update_Alt();
+            if(update_temp) me.update_temp
             settimer(func { me.update_loop(); }, 0);
 		}
     },
+
+    update_temp: func()
+    {
+
+    }
 
     update_speed: func()
     {
@@ -192,7 +189,7 @@ var GDC47B = {
         rho = math.max(rho, 0.001);
         pt = math.max(pt, p);
         var V_true = math.sqrt( 7 * p/rho * (math.pow( 1 + (pt-p)/p , 0.2857142857142857 ) -1 ));
-        var mach = V_true / c;
+        var mach = math.max(V_true / c,0);
         me.dataOut.Airspeed.IMN.setDoubleValue(mach);
         me.dataOut.Airspeed.TASkt.setDoubleValue(V_true * constants.MPS_TO_KT);
     },
@@ -211,8 +208,6 @@ var GDC47B = {
             setHpa = sprintf("%.2f",(constants.INHG_TO_PA*setInhg)/100);
             me.dataIn.setHpa.setValue(setHpa);
         }
-        print("setInhg" ~ setInhg);
-        print("setHpa" ~ setHpa);
         p = setInhg;
         me.data.kollsmanInhg    = setInhg;
         me.data.kollsmanHpa     = setHpa;
@@ -229,7 +224,7 @@ var GDC47B = {
         me.dataOut.Altimeter.SAlt.setDoubleValue(10* math.round(raw_pa/10));
 
         dt = me.data.dt;
-        #print(dt);
+
         VSfpm = fgGetLowPass((raw_pa - me.data.current_alt) * (1/dt) * 60, me.data.LastVSfpm, dt*100);
         me.dataOut.Vspeed.fpm.setDoubleValue(VSfpm);
         me.dataOut.Vspeed.kts.setDoubleValue(VSfpm);
