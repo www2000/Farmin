@@ -9,32 +9,29 @@ var GMU44 = {
 	{
 		var m = { parents: [GMU44] };
 		m.module = module;
-		props.globals.initNode('/systems/GMU44['~m.module~']/heading',0,'DOUBLE');
-		props.globals.props.globals.initNode('/systems/GMU44['~m.module~']/serviceable', 1, "BOOL");
-		props.globals.initNode('/systems/GMU44['~m.module~']/operable', 0, "BOOL");
+		var dataOut = {};
+		var dataIn	= {};
+		root = props.globals.initNode('/Farmin/GMU44['~m.module~']');
+		dataOut.serviceable 	= root.initNode('serviceable', 1, "BOOL");
+		dataOut.operable		= root.initNode('operable', 0, "BOOL");
+		dataOut.heading			= root.initNode('heading',0,'DOUBLE');
+		dataOut.Magnetometer_X	= root.initNode('MagnetometerX',0,'DOUBLE');
+		dataOut.Magnetometer_Y	= root.initNode('MagnetometerY',0,'DOUBLE');
+		dataOut.Magnetometer_Z	= root.initNode('MagnetometerZ',0,'DOUBLE');
+
+		datain.
+		m.dataIn	= dataIn;
+		m.dataOut	= dataOut;
+
 		m.smooth = smooth.new(30);
 		return m;
 	},
 	update: func()
 	{
-		var sensordata = getprop("/orientation/heading-magnetic-deg");
-		var rawdata = sensordata + (0.2*noiseGenerator());
-		if (rawdata < 0.0 )
-		{
-			rawdata = rawdata + 360.0;
-		}
-		elsif(rawdata > 360.0)
-		{
-			rawdata = rawdata = 360.0;
-		};
-		var heading = me.smooth.smooth(rawdata);
-		setprop('/systems/GMU44['~me.module~']/heading',heading);
 
-		var power = getprop('/systems/GMU44[' ~ me.module ~ ']/operable');
-		var serviceable = getprop('/systems/GMU44[' ~ me.module ~ ']/serviceable');
 		if(power == 0 or serviceable == 0)
 		{
-			setprop('/systems/GMU44['~me.module~']/heading', 0);
+
 			settimer(func { me.offLine() }, 0.02);
 		}
 		else
@@ -44,8 +41,7 @@ var GMU44 = {
 	},
 	offLine: func()
 	{
-		var power = getprop('/systems/GMU44['~me.module~']/operable');
-		var serviceable = getprop('/systems/GMU44['~me.module~']/serviceable');
+
 		if(power == 1 and serviceable == 1)
 		{
 			settimer(func { me.update() }, 2);

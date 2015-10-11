@@ -8,8 +8,8 @@ var GRS77 {
     {
         var m = { parents: [GRS77] };
 		m.module = module;
-
-		props.globals.initNode('/systems/GRS77['~m.module~']/Attitude',0,'DOUBLE');
+        root = props.globals.initNode('/Farmin/GRS77['~m.module~']')
+		props.globals.initNode('/Farmin/GRS77['~m.module~']/Attitude',0,'DOUBLE');
 		props.globals.initNode('/systems/GRS77['~m.module~']/ROT',0,'DOUBLE');
         props.globals.initNode('/systems/GRS77['~m.module~']/SlipSkid',0,'DOUBLE');
         props.globals.initNode('/systems/GRS77['~m.module~']/Pitch',0,'DOUBLE');

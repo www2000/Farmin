@@ -39,7 +39,7 @@ var GDC47A = {
         var airspeed_internal   = {};
         var service             = {};
 
-        root = props.globals.initNode('/systems/GDC47A['~module~']/');
+        root = props.globals.initNode('/Farmin/GDC47A['~module~']/');
 
         # system
         service.serviceable     = root.initNode('serviceable', 1, "BOOL");
