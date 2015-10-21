@@ -28,6 +28,28 @@ var GMU44 = {
 	},
 	update: func()
 	{
+		#update rotation
+		var roll_X = 0;
+		var roll_Y = 0;
+		var roll_Z = 0;
+
+		#Mag
+		#rotation x
+		xd			= math.sqrt(x*x + y*y);
+		var X_theta	= math.atan2(y,z);
+		roll_Z		= roll_Z + xd * math.cos(X_theta);
+		roll_Y		= roll_Y + xd * math.sin(X_theta);
+		#rotation Y
+		yd			= math.sqrt(x*x + y*y);
+		var X_theta	= math.atan2(y,z);
+		roll_Z		= roll_X + xd * math.cos(X_theta);
+		roll_X		= roll_Y + xd * math.sin(X_theta);
+		#rotation Z
+		zd			= math.sqrt(x*x + y*y);
+		var X_theta	= math.atan2(y,z);
+		roll_X		= roll_X + xd * math.cos(X_theta);
+		roll_Y		= roll_Y + xd * math.sin(X_theta);
+
 
 		if(power == 0 or serviceable == 0)
 		{
@@ -58,7 +80,7 @@ var GMU44 = {
 	},
 };
 #test delete in the further.
-test = GMU44.new(0);
+var test = GMU44.new(0);
 test.run();
 
 test2 = GMU44.new(1);
