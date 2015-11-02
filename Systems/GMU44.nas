@@ -21,22 +21,40 @@ var GMU44 = {
 
 		dataIn.magnetic_dip			= props.globals.getNode('/environment/magnetic-dip-deg');
 		dataIn.magnetic_variation	= props.globals.getNode('/environment/magnetic-variation-deg');
-		m.dataIn	= dataIn;
-		m.dataOut	= dataOut;
+		dataIn.pitch				= props.globals.getNode('/orientation/pitch-deg');
+		dataIn.roll					= props.globals.getNode('/orientation/roll-deg');
+		dataIn.yaw					= props.globals.getNode('/orientation/heading-deg');
+		dataIn.magheading			= props.globals.getNode('/orientation/heading-magnetic-deg');
+		m.dataIn					= dataIn;
+		m.dataOut					= dataOut;
 
 		#m.smooth = smooth.new(30);
 		return m;
 	},
 	update: func()
 	{
-		#set the defauld value for the magnetometer.
-		var MagneticX	= 1;
-		var MagneticY	= 0;
-		var MagneticZ	= 0;
+		#set the defauld value for the magnetometer and include the magnetic-dip and magnetic_variation.
+		var md = me.dataIn.magnetic_dip.getValue() * D2R;
+		var mv = me.dataIn.magnetic_variation.getValue() * D2R;
+		var MagneticX	= 1 * math.cos(mv) * math.sin(md);
+		var MagneticY	= 1 * math.sin(mv) * math.sin(md);
+		var MagneticZ	= 1 * math.cos(md);
 
-		#set variation dip and variation.
-		var mdip		= me.datain.magnetic-dip.getValue();
-		var mvar		= me.datain.magnetic-variation.getValue();
+		#set the pitch roll yaw values of the plane
+		var pitch	= me.dataIn.pitch.getValue() * D2R;
+		var roll	= me.dataIn.roll.getValue() * D2R;
+		var yaw		= me.dataIn.yaw.getValue() * D2R;
+		#apply pitch (around x)
+		MagneticX = MagneticX * cos(yaw) - MagneticZ * sin(yaw)
+		MagneticZ = MagneticZ * cos(yaw) + MagneticX * sin(yaw)
+		#apply Roll (around y)
+		MagneticY = MagneticY * cos(roll) - z * sin(roll)
+		MagneticZ = MagneticZ * cos(roll) + MagneticY * sin(roll)
+		#apply roll (around z)
+		MagneticX = MagneticX * cos(pitch) - MagneticY * sin(pitch)
+		MagneticY = MagneticY * cos(pitch) + MagneticX * sin(pitch)
+
+		Heading_mag = dataIn.magheading.getValue();
 
 		if(power == 0 or serviceable == 0)
 		{
@@ -45,6 +63,10 @@ var GMU44 = {
 		}
 		else
 		{
+			me.dataOut.heading.setDoubleValue(Heading_mag);
+			me.dataOut.Magnetometer_X.setDoubleValue(MagneticX);
+			me.dataOut.Magnetometer_Y.setDoubleValue(MagneticY);
+			me.dataOut.Magnetometer_Z.setDoubleValue(MagneticZ);
 			settimer(func { me.update() },0.02);
 		}
 	},
