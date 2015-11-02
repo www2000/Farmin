@@ -39,7 +39,7 @@ var GDC47A = {
         var airspeed_internal   = {};
         var service             = {};
 
-        root = props.globals.initNode('/Farmin/GDC47A['~module~']/');
+        root = props.globals.getNode('/Farmin/GDC47A['~module~']/', create=1);
 
         # system
         service.serviceable     = root.initNode('serviceable', 1, "BOOL");
@@ -254,6 +254,8 @@ var GDC47A = {
         settimer(func { me.offLine() },0.01);
     },
 };
-
+var run = func(){
 test = GDC47A.new();
 test.run();
+};
+setlistener("/sim/signals/fdm-initialized", run);
