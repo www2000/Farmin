@@ -1,5 +1,5 @@
 #
-#  GDC47A
+#  GDC74B
 #
 # Spec
 # Aircraft Pressure Altitude Range -1400 feed to 50000 feet
@@ -39,7 +39,7 @@ var GDC47A = {
         var airspeed_internal   = {};
         var service             = {};
 
-        root = props.globals.getNode('/Farmin/GDC47A['~module~']/', create=1)
+        root = props.globals.getNode('/Farmin/GDC74['~module~']/', create=1)
 
         # system
         service.serviceable     = root.initNode('serviceable', 1, "BOOL");

@@ -11,9 +11,10 @@ var GMU44 = {
 		m.module = module;
 		var dataOut 				= {};
 		var dataIn					= {};
+		var service					= {};
 		root 						= props.globals.getNode('/Farmin/GMU44['~m.module~']', create=1);
-		dataOut.serviceable 		= root.initNode('serviceable', 1, "BOOL");
-		dataOut.operable			= root.initNode('operable', 0, "BOOL");
+		service.serviceable 		= root.initNode('serviceable', 1, "BOOL");
+		service.operable			= root.initNode('operable', 0, "BOOL");
 		dataOut.heading				= root.initNode('heading',0,'DOUBLE');
 		dataOut.Magnetometer_X		= root.initNode('MagnetometerX',0,'DOUBLE');
 		dataOut.Magnetometer_Y		= root.initNode('MagnetometerY',0,'DOUBLE');
@@ -25,6 +26,7 @@ var GMU44 = {
 		dataIn.roll					= props.globals.getNode('/orientation/roll-deg');
 		dataIn.yaw					= props.globals.getNode('/orientation/heading-deg');
 		dataIn.magheading			= props.globals.getNode('/orientation/heading-magnetic-deg');
+		m.service					= service;
 		m.dataIn					= dataIn;
 		m.dataOut					= dataOut;
 
@@ -33,6 +35,8 @@ var GMU44 = {
 	},
 	update: func()
 	{
+		var power = me.service.operable.getValue();
+		var serviceable = me.service.serviceable.getValue();
 		#set the defauld value for the magnetometer and include the magnetic-dip and magnetic_variation.
 		var md = me.dataIn.magnetic_dip.getValue() * D2R;
 		var mv = me.dataIn.magnetic_variation.getValue() * D2R;
@@ -45,16 +49,16 @@ var GMU44 = {
 		var roll	= me.dataIn.roll.getValue() * D2R;
 		var yaw		= me.dataIn.yaw.getValue() * D2R;
 		#apply pitch (around x)
-		MagneticX = MagneticX * cos(yaw) - MagneticZ * sin(yaw)
-		MagneticZ = MagneticZ * cos(yaw) + MagneticX * sin(yaw)
+		MagneticX = MagneticX * math.cos(yaw) - MagneticZ * math.sin(yaw);
+		MagneticZ = MagneticZ * math.cos(yaw) + MagneticX * math.sin(yaw);
 		#apply Roll (around y)
-		MagneticY = MagneticY * cos(roll) - z * sin(roll)
-		MagneticZ = MagneticZ * cos(roll) + MagneticY * sin(roll)
+		MagneticY = MagneticY * math.cos(roll) - MagneticZ * math.sin(roll);
+		MagneticZ = MagneticZ * math.cos(roll) + MagneticY * math.sin(roll);
 		#apply roll (around z)
-		MagneticX = MagneticX * cos(pitch) - MagneticY * sin(pitch)
-		MagneticY = MagneticY * cos(pitch) + MagneticX * sin(pitch)
+		MagneticX = MagneticX * math.cos(pitch) - MagneticY * math.sin(pitch);
+		MagneticY = MagneticY * math.cos(pitch) + MagneticX * math.sin(pitch);
 
-		Heading_mag = dataIn.magheading.getValue();
+		Heading_mag = me.dataIn.magheading.getValue();
 
 		if(power == 0 or serviceable == 0)
 		{
@@ -72,7 +76,8 @@ var GMU44 = {
 	},
 	offLine: func()
 	{
-
+		var power = me.service.operable.getValue();
+		var serviceable = me.service.serviceable.getValue();
 		if(power == 1 and serviceable == 1)
 		{
 			settimer(func { me.update() }, 2);
