@@ -62,7 +62,6 @@ var GMU44 = {
 
 		if(power == 0 or serviceable == 0)
 		{
-
 			settimer(func { me.offLine() }, 0.02);
 		}
 		else
