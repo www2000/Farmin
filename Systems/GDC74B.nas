@@ -252,7 +252,7 @@ var GDC47A = {
   },
   run: func()
   {
-    settimer(func { me.offLine() },0.01);
+    me.offLine();
   },
 };
 

@@ -89,7 +89,7 @@ var GMU44 = {
 	},
 	run: func()
 	{
-		thread.newthread(func { me.offLine() })
+		 me.offLine();
 	},
 };
 #test delete in the further.
